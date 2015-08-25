@@ -56,6 +56,26 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView currentLocation;
         protected ImageView currentCondition;
         protected TextView currentTemperature;
+        protected TextView day1Name;
+        protected TextView day2Name;
+        protected TextView day3Name;
+        protected TextView day4Name;
+        protected TextView day5Name;
+        protected TextView day1Hi;
+        protected TextView day2Hi;
+        protected TextView day3Hi;
+        protected TextView day4Hi;
+        protected TextView day5Hi;
+        protected TextView day1Low;
+        protected TextView day2Low;
+        protected TextView day3Low;
+        protected TextView day4Low;
+        protected TextView day5Low;
+        protected ImageView day1condition;
+        protected ImageView day2condition;
+        protected ImageView day3condition;
+        protected ImageView day4condition;
+        protected ImageView day5condition;
 
         public WeatherViewHolder(View v){
             super(v);
@@ -63,6 +83,11 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             currentLocation = (TextView) v.findViewById(R.id.viewholder_main_weather_location);
             currentCondition = (ImageView) v.findViewById(R.id.viewholder_main_weather_current_condition_graphic);
             currentTemperature = (TextView) v.findViewById(R.id.viewholder_main_weather_current_temperature);
+            day1Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_1);
+            day2Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_2);
+            day3Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_3);
+            day4Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_4);
+            day5Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_5);
         }
 
     }
