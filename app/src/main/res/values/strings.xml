@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SimpleNews</string>
+    <string name="action_settings">Settings</string>
+    <string name="viewholder_main_weather_date">CURRENT DATE</string>
+    <string name="viewholder_main_weather_location">CURRENT LOCATION</string>
+    <string name="viewholder_main_weather_image_view">Current Weather</string>
+    <string name="viewholder_main_weather_current_temperature">CURRENT TEMPERATURE</string>
+    <string name="viewholder_main_weather_day">DAY</string>
+    <string name="viewholder_main_weather_image_view_day">Weather Condtion</string>
+    <string name="viewholder_main_weather_temperature_day">100</string>
+    <string name="viewholder_main_weather_card_title">Weather</string>
+</resources>
