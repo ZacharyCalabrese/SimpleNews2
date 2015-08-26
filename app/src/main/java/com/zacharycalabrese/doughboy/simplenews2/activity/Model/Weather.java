@@ -7,19 +7,19 @@ import com.orm.SugarRecord;
  */
 public class Weather extends SugarRecord<Weather> {
     public String location;
-    private String timestamp;
-    private String temperatureHi;
-    private String temperatureLow;
-    private String temperatureCurrent;
-    private String conditions;
-    private String cloudiness;
-    private String windiness;
-    private String day;
-    private String date;
-    private String month;
-    private String pressure;
-    private String humidity;
-    private String direction;
+    public String timestamp;
+    public String temperatureHi;
+    public String temperatureLow;
+    public String temperatureCurrent;
+    public String conditions;
+    public String cloudiness;
+    public String windiness;
+    public String day;
+    public String date;
+    public String month;
+    public String pressure;
+    public String humidity;
+    public String direction;
 
     public Weather(){
 

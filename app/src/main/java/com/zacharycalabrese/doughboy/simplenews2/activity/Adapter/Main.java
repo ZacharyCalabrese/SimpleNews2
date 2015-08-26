@@ -33,12 +33,21 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i){
+        updateWeatherViewHolder(viewHolder);
+
+    }
+
+    private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
         Weather weather = new Weather();
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results
                 = weather.getWeekData();
 
-        WeatherViewHolder weatherViewHolder = (WeatherViewHolder)viewHolder ;
-        weatherViewHolder.currentTemperature.setText(results.get(0).location);
+        WeatherViewHolder weatherViewHolder = (WeatherViewHolder)viewHolder;
+
+        weatherViewHolder.currentDate.setText(results.get(0).date);
+        weatherViewHolder.currentLocation.setText(results.get(0).location);
+        //weatherViewHolder.currentCondition.setText(results.get(0).conditions);
+        weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
     }
 
     @Override
@@ -71,11 +80,11 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView day3Low;
         protected TextView day4Low;
         protected TextView day5Low;
-        protected ImageView day1condition;
-        protected ImageView day2condition;
-        protected ImageView day3condition;
-        protected ImageView day4condition;
-        protected ImageView day5condition;
+        protected ImageView day1Condition;
+        protected ImageView day2Condition;
+        protected ImageView day3Condition;
+        protected ImageView day4Condition;
+        protected ImageView day5Condition;
 
         public WeatherViewHolder(View v){
             super(v);
@@ -88,6 +97,21 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             day3Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_3);
             day4Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_4);
             day5Name = (TextView) v.findViewById(R.id.viewholder_main_weather_day_5);
+            day1Hi = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_1_high);
+            day2Hi = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_2_high);
+            day3Hi = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_3_high);
+            day4Hi = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_4_high);
+            day5Hi = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_5_high);
+            day1Low = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_1_low);
+            day2Low = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_2_low);
+            day3Low = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_3_low);
+            day4Low = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_4_low);
+            day5Low = (TextView) v.findViewById(R.id.viewholder_main_weather_temperature_day_5_low);
+            day1Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_1);
+            day2Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_2);
+            day3Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_3);
+            day4Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_4);
+            day5Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_5);
         }
 
     }
