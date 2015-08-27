@@ -38,8 +38,8 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return new WeatherViewHolder(view);
             case 1:
                 layoutInflater = LayoutInflater.from(viewGroup.getContext());
-                view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
-                return new WeatherViewHolder(view);
+                view = layoutInflater.inflate(R.layout.viewholder_main_news, viewGroup, false);
+                return new NewsViewHolder(view);
             default:
                 return null;
         }
@@ -53,7 +53,6 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 updateWeatherViewHolder(viewHolder);
                 break;
             case 1:
-                updateWeatherViewHolder(viewHolder);
                 break;
             default:
                 break;
@@ -164,5 +163,32 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             day5Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_5);
         }
 
+    }
+
+    public class NewsViewHolder extends RecyclerView.ViewHolder{
+        protected TextView headline1;
+        protected TextView headline2;
+        protected TextView headline3;
+        protected TextView headline4;
+        protected TextView headline5;
+        protected TextView headline6;
+        protected TextView headline7;
+        protected TextView headline8;
+        protected TextView headline9;
+        protected TextView headline10;
+
+        public NewsViewHolder(View v){
+            super(v);
+            headline1 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_1);
+            headline2 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_2);
+            headline3 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_3);
+            headline4 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_4);
+            headline5 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_5);
+            headline6 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_6);
+            headline7 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_7);
+            headline8 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_8);
+            headline9 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_9);
+            headline10 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_10);
+        }
     }
 }

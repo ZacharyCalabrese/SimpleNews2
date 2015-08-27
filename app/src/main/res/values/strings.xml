@@ -9,4 +9,7 @@
     <string name="viewholder_main_weather_image_view_day">Weather Condtion</string>
     <string name="viewholder_main_weather_temperature_day">100</string>
     <string name="viewholder_main_weather_card_title">Weather</string>
+    <string name="viewholder_main_news_card_title">News</string>
+    <string name="viewholder_main_news_temporary_headline">Headline</string>
+    <string name="viewholder_main_news_top_news">Top Headlines</string>
 </resources>

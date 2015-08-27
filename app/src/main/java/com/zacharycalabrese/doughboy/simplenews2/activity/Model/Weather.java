@@ -26,7 +26,6 @@ public class Weather extends SugarRecord<Weather> {
     }
 
     public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weatherObject){
-
         this.location = weatherObject.location;
         this.temperatureHi = weatherObject.temperatureHi;
         this.temperatureLow = weatherObject.temperatureLow;

@@ -108,4 +108,95 @@
         <item>strong breeze</item>
         <item>high wind, near gale</item>
     </string-array>
+
+    <string-array name="base_sources_names">
+        <item>ESPN - NFL</item>
+        <item>ESPN - NBA</item>
+        <item>ESPN - MLB</item>
+        <item>ESPN - NHL</item>
+        <item>ESPN - Motorsports</item>
+        <item>ESPN - Soccer</item>
+        <item>ESPN - NCAABB</item>
+        <item>ESPN - NCAAF</item>
+        <item>NYTimes - Homepage</item>
+        <item>NYTimes - World</item>
+        <item>NYTimes - U.S.</item>
+        <item>NYTimes - Politics</item>
+        <item>NYTimes - Business</item>
+        <item>NYTimes - Technology</item>
+        <item>NYTimes - Sports</item>
+        <item>NYTimes - Science</item>
+        <item>NYTimes - Health</item>
+        <item>NYTimes - Arts</item>
+        <item>NYTimes - Dining</item>
+        <item>Reuters - Arts</item>
+        <item>Reuters - Business</item>
+        <item>Reuters - Entertainment</item>
+        <item>Reuters - Health</item>
+        <item>Reuters - Lifestyle</item>
+        <item>Reuters - Money</item>
+        <item>Reuters - Politics</item>
+        <item>Reuters - Science</item>
+        <item>Reuters - Sports</item>
+        <item>Reuters - Technology</item>
+        <item>Reuters - Top News</item>
+        <item>Reuters - U.S. News</item>
+        <item>Reuters - World News</item>
+        <item>BBC - Top Stories</item>
+        <item>BBC - World</item>
+        <item>BBC - UK</item>
+        <item>BBC - Business</item>
+        <item>BBC - Politics</item>
+        <item>BBC - Health</item>
+        <item>BBC - Science</item>
+        <item>BBC - Technology</item>
+        <item>BBC - Entertainment</item>
+
+    </string-array>
+
+    <string-array name="base_sources_rss_url">
+        <item>http://sports.espn.go.com/espn/rss/nfl/news</item>
+        <item>http://sports.espn.go.com/espn/rss/nba/news</item>
+        <item>http://sports.espn.go.com/espn/rss/mlb/news</item>
+        <item>http://sports.espn.go.com/espn/rss/nhl/news</item>
+        <item>http://sports.espn.go.com/espn/rss/rpm/news</item>
+        <item>http://soccernet.espn.go.com/rss/news</item>
+        <item>http://sports.espn.go.com/espn/rss/ncb/news</item>
+        <item>http://sports.espn.go.com/espn/rss/ncf/news</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/World.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/US.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/Politics.xml</item>
+        <item>http://feeds.nytimes.com/nyt/rss/Business</item>
+        <item>http://feeds.nytimes.com/nyt/rss/Technology</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/Sports.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/Science.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/Health.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/Arts.xml</item>
+        <item>http://www.nytimes.com/services/xml/rss/nyt/DiningandWine.xml</item>
+        <item>http://feeds.reuters.com/news/artsculture</item>
+        <item>http://feeds.reuters.com/reuters/businessNews</item>
+        <item>http://feeds.reuters.com/reuters/entertainment</item>
+        <item>http://feeds.reuters.com/reuters/healthNews</item>
+        <item>http://feeds.reuters.com/reuters/lifestyle</item>
+        <item>http://feeds.reuters.com/news/wealth</item>
+        <item>http://feeds.reuters.com/Reuters/PoliticsNews</item>
+        <item>http://feeds.reuters.com/reuters/scienceNews</item>
+        <item>http://feeds.reuters.com/reuters/sportsNews</item>
+        <item>http://feeds.reuters.com/reuters/technologyNews</item>
+        <item>http://feeds.reuters.com/reuters/topNews</item>
+        <item>http://feeds.reuters.com/Reuters/domesticNews</item>
+        <item>http://feeds.reuters.com/Reuters/worldNews</item>
+        <item>http://feeds.bbci.co.uk/news/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/world/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/uk/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/business/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/politics/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/health/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/science_and_environment/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/technology/rss.xml</item>
+        <item>http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml</item>
+
+    </string-array>
+
 </resources>
