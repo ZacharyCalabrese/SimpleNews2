@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ic_cloudy">
+        <item>broken clouds</item>
+        <item>overcast clouds</item>
+    </string-array>
+
+    <string-array name="ic_freeze">
+        <item>freezing rain</item>
+        <item>cold</item>
+    </string-array>
+
+    <string-array name="ic_light_cloud">
+        <item>scattered clouds</item>
+        <item>few clouds</item>
+    </string-array>
+
+    <string-array name="ic_sun_cloud_rain">
+        <item>light rain</item>
+        <item>moderate rain</item>
+    </string-array>
+
+    <string-array name="ic_rain">
+        <item>heavy intensity drizzle</item>
+        <item>light intensity drizzle rain</item>
+        <item>heavy intensity rain</item>
+        <item>very heavy rain</item>
+        <item>light intensity shower rain</item>
+        <item>shower rain</item>
+        <item>heavy intensity shower rain</item>
+        <item>ragged shower rain</item>
+        <item>shower sleet</item>
+        <item>gale</item>
+    </string-array>
+
+    <string-array name="ic_light_rain_no_sun">
+        <item>light intensity drizzle</item>
+        <item>drizzle</item>
+        <item>drizzle rain</item>
+        <item>heavy intensity drizzle rain</item>
+        <item>shower rain and drizzle</item>
+        <item>heavy shower rain and drizzle</item>
+        <item>shower drizzle</item>
+    </string-array>
+
+    <string-array name="ic_mild_thunderstorm">
+        <item>thunderstorm with rain</item>
+        <item>thunderstorm with heavy rain</item>
+        <item>tropical storm</item>
+        <item>hurricane</item>
+        <item>hail</item>
+        <item>severe gale</item>
+        <item>hurricane</item>
+    </string-array>
+
+    <string-array name="ic_rainy_thunderstorm_sun">
+        <item>thunderstorm with light rain</item>
+        <item>thunderstorm with light drizzle</item>
+        <item>thunderstorm with drizzle</item>
+        <item>thunderstorm with heavy drizzle</item>
+        <item>extreme rain</item>
+    </string-array>
+
+    <string-array name="ic_thunder_with_sun">
+        <item>light thunderstorm</item>
+        <item>storm</item>
+    </string-array>
+
+    <string-array name="ic_thunder">
+        <item>thunderstorm</item>
+        <item>heavy thunderstorm</item>
+        <item>ragged thunderstorm</item>
+        <item>violent storm</item>
+    </string-array>
+
+    <string-array name="ic_light_snow">
+        <item>snow</item>
+        <item>heavy snow</item>
+        <item>sleet</item>
+        <item>rain and snow</item>
+        <item>light shower snow</item>
+        <item>shower snow</item>
+        <item>heavy shower snow</item>
+    </string-array>
+
+    <string-array name="ic_snow_with_sun">
+        <item>light snow</item>
+        <item>light rain and snow</item>
+    </string-array>
+
+    <string-array name="ic_sunny">
+        <item>sky is clear</item>
+        <item>hot</item>
+        <item>clear sky</item>
+        <item>calm</item>
+        <item>light breeze</item>
+        <item>gentle breeze</item>
+        <item>moderate breeze</item>
+        <item>fresh breeze</item>
+    </string-array>
+
+    <string-array name="ic_tornado">
+        <item>tornado</item>
+    </string-array>
+
+    <string-array name="ic_windy">
+        <item>windy</item>
+        <item>strong breeze</item>
+        <item>high wind, near gale</item>
+    </string-array>
+</resources>

@@ -1,5 +1,6 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,10 @@ import java.util.List;
  */
 public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int CARD_COUNT = 2;
+    private Context context;
 
-    public Main(){
-
+    public Main(Context context){
+        this.context = context;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
-        Weather weather = new Weather();
+        Weather weather = new Weather(context);
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results
                 = weather.getWeekData();
 
@@ -47,11 +49,31 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         try {
             String dateFormatted = results.get(0).day + " " + results.get(0).month
                     + " " + results.get(0).date;
+
             weatherViewHolder.currentDate.setText(dateFormatted);
             weatherViewHolder.currentLocation.setText(results.get(0).location);
-            //weatherViewHolder.currentCondition.setText(results.get(0).conditions);
+            weatherViewHolder.currentCondition.setImageResource(Integer.parseInt(results.get(0).conditions));
             weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
             weatherViewHolder.day1Name.setText(results.get(0).day);
+            weatherViewHolder.day1Hi.setText(results.get(0).temperatureHi);
+            weatherViewHolder.day1Low.setText(results.get(0).temperatureLow);
+            weatherViewHolder.day1Condition.setImageResource(Integer.parseInt(results.get(0).conditions));
+            weatherViewHolder.day2Name.setText(results.get(1).day);
+            weatherViewHolder.day2Hi.setText(results.get(1).temperatureHi);
+            weatherViewHolder.day2Low.setText(results.get(1).temperatureLow);
+            weatherViewHolder.day2Condition.setImageResource(Integer.parseInt(results.get(1).conditions));
+            weatherViewHolder.day3Name.setText(results.get(2).day);
+            weatherViewHolder.day3Hi.setText(results.get(2).temperatureHi);
+            weatherViewHolder.day3Low.setText(results.get(2).temperatureLow);
+            weatherViewHolder.day3Condition.setImageResource(Integer.parseInt(results.get(2).conditions));
+            weatherViewHolder.day4Name.setText(results.get(3).day);
+            weatherViewHolder.day4Hi.setText(results.get(3).temperatureHi);
+            weatherViewHolder.day4Low.setText(results.get(3).temperatureLow);
+            weatherViewHolder.day4Condition.setImageResource(Integer.parseInt(results.get(3).conditions));
+            weatherViewHolder.day5Name.setText(results.get(4).day);
+            weatherViewHolder.day5Hi.setText(results.get(4).temperatureHi);
+            weatherViewHolder.day5Low.setText(results.get(4).temperatureLow);
+            weatherViewHolder.day5Condition.setImageResource(Integer.parseInt(results.get(4).conditions));
         }catch (IndexOutOfBoundsException e){
 
         }
