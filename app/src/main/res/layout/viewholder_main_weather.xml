@@ -61,7 +61,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/viewholder_main_weather_current_condition_graphic"
-                android:src="@mipmap/ic_cloudy_thunder"
+                android:src="@mipmap/ic_cloudy"
                 android:contentDescription="@string/viewholder_main_weather_image_view"
                 />
 
@@ -107,7 +107,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:id="@+id/viewholder_main_weather_image_view_day_1"
-                        android:src="@mipmap/ic_cloudy_thunder"
+                        android:src="@mipmap/ic_cloudy"
                         android:contentDescription="@string/viewholder_main_weather_image_view_day"/>
 
                     <TextView
@@ -150,7 +150,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:id="@+id/viewholder_main_weather_image_view_day_2"
-                        android:src="@mipmap/ic_cloudy_thunder"
+                        android:src="@mipmap/ic_cloudy"
                         android:contentDescription="@string/viewholder_main_weather_image_view_day"/>
 
                     <TextView
@@ -193,7 +193,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:id="@+id/viewholder_main_weather_image_view_day_3"
-                        android:src="@mipmap/ic_cloudy_thunder"
+                        android:src="@mipmap/ic_cloudy"
                         android:contentDescription="@string/viewholder_main_weather_image_view_day"/>
 
                     <TextView
@@ -236,7 +236,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:id="@+id/viewholder_main_weather_image_view_day_4"
-                        android:src="@mipmap/ic_cloudy_thunder"
+                        android:src="@mipmap/ic_cloudy"
                         android:contentDescription="@string/viewholder_main_weather_image_view_day"/>
 
                     <TextView
@@ -278,7 +278,7 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:id="@+id/viewholder_main_weather_image_view_day_5"
-                        android:src="@mipmap/ic_cloudy_thunder"
+                        android:src="@mipmap/ic_cloudy"
                         android:contentDescription="@string/viewholder_main_weather_image_view_day"/>
 
                     <TextView

@@ -25,24 +25,21 @@ public class Weather extends SugarRecord<Weather> {
 
     }
 
-    public Weather(String location, String temperatureHi, String temperatureLow,
-                   String temperatureCurrent, String conditions, String cloudiness,
-                   String windiness, String day, String date, String month, String pressure,
-                   String humidity, String direction){
+    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weatherObject){
 
-        this.location = location;
-        this.temperatureHi = temperatureHi;
-        this.temperatureLow = temperatureLow;
-        this.temperatureCurrent = temperatureCurrent;
-        this.conditions = conditions;
-        this.cloudiness = cloudiness;
-        this.windiness = windiness;
-        this.day = day;
-        this.date = date;
-        this.month = month;
-        this.pressure = pressure;
-        this.humidity = humidity;
-        this.direction = direction;
+        this.location = weatherObject.location;
+        this.temperatureHi = weatherObject.temperatureHi;
+        this.temperatureLow = weatherObject.temperatureLow;
+        this.temperatureCurrent = weatherObject.temperatureCurrent;
+        this.conditions = weatherObject.conditions;
+        this.cloudiness = weatherObject.cloudiness;
+        this.windiness = weatherObject.windiness;
+        this.day = weatherObject.day;
+        this.date = weatherObject.date;
+        this.month = weatherObject.month;
+        this.pressure = weatherObject.pressure;
+        this.humidity = weatherObject.humidity;
+        this.direction = weatherObject.direction;
         timestamp = ((Long) System.currentTimeMillis()).toString();
 
     }

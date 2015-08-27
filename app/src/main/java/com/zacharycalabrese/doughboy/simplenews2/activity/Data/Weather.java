@@ -20,8 +20,8 @@ public class Weather {
         this.arrayOfJsonResults = arrayOfJsonResults;
         splitArrayOfJsonResults = new String[arrayOfJsonResults.length][];
         splitJsonResults();
-        deleteOldData();
-        //writeToDatabase();
+        //deleteOldData();
+        writeToDatabase();
     }
 
     public List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> getWeekData(){
@@ -50,31 +50,17 @@ public class Weather {
             Pattern pattern = Pattern.compile(Pattern.quote(" "));
             String[] dayDateMonth = pattern.split(workingDay[0]);
 
-            com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weather =
-                    new com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather();
-
-            weather.location = workingDay[6];
-            weather.temperatureHi = workingDay[7];
-            weather.temperatureLow = workingDay[8];
-            weather.temperatureCurrent = workingDay[2];
-            weather.conditions = workingDay[1];
-            weather.cloudiness = workingDay[4];
-            weather.windiness = workingDay[5];
-            weather.day = dayDateMonth[0];
-            weather.date = dayDateMonth[2];
-            weather.month = dayDateMonth[1];
-            weather.pressure = workingDay[9];
-            weather.humidity = workingDay[10];
-            weather.direction = workingDay[3];
-
+            com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weatherObject =
+                    new com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather(
+                            workingDay[6], workingDay[7], workingDay[8], workingDay[2],
+                            workingDay[1], workingDay[4], workingDay[5], dayDateMonth[0],
+                            dayDateMonth[2], dayDateMonth[1], workingDay[9], workingDay[10],
+                            workingDay[3]);
 
             com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather session;
 
             session = new com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather(
-                    weather.location, weather.temperatureHi, weather.temperatureLow,
-                    weather.temperatureCurrent, weather.conditions, weather.cloudiness,
-                    weather.windiness, weather.day, weather.date, weather.month, weather.pressure,
-                    weather.humidity, weather.direction);
+                    weatherObject);
 
             session.save();
         }

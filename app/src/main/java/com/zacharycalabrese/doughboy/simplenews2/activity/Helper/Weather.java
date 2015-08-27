@@ -17,4 +17,25 @@ public class Weather {
     public String pressure;
     public String humidity;
     public String direction;
+
+    public Weather(String location, String temperatureHi, String temperatureLow,
+                   String temperatureCurrent, String conditions, String cloudiness,
+                   String windiness, String day, String date, String month,
+                   String pressure, String humidity, String direction){
+
+        this.location = location;
+        this.temperatureHi = temperatureHi;
+        this.temperatureLow = temperatureLow;
+        this.temperatureCurrent = temperatureCurrent;
+        this.conditions = conditions;
+        this.cloudiness = cloudiness;
+        this.windiness = windiness;
+        this.day = day;
+        this.date = date;
+        this.month = month;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.direction = direction;
+
+    }
 }
