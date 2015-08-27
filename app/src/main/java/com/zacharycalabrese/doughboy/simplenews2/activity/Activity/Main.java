@@ -15,23 +15,55 @@ import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.Weather;
 
 
 public class Main extends ActionBarActivity {
+    com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main mainAdapter;
+    RecyclerView recyclerView;
+    Thread thread = new Thread() {
+        @Override
+        public void run() {
+            Weather weather = new Weather();
+            weather.updateWeather();
+            while (!weather.getUpdatedWeather()){
+                try {
+                    sleep(1000);
+                }catch (InterruptedException e){
+
+                }
+            };
+
+            updateWeather();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new Weather();
+        drawScreen();
+        thread.start();
+        //updateWeather();
+    }
 
+    private void drawScreen(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_main_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.activity_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main mainAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main();
+        mainAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main();
         recyclerView.setAdapter(mainAdapter);
+    }
+
+    public void updateWeather(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mainAdapter.notifyDataSetChanged();
+            }
+        });
+
 
     }
 

@@ -44,12 +44,17 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         WeatherViewHolder weatherViewHolder = (WeatherViewHolder)viewHolder;
 
-        //String dateFormatted = results.get(0).day + " " + results.get(0).month
-         //       + " " + results.get(0).date;
-        //weatherViewHolder.currentDate.setText(dateFormatted);
-        weatherViewHolder.currentLocation.setText(results.get(0).location);
-        //weatherViewHolder.currentCondition.setText(results.get(0).conditions);
-        weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
+        try {
+            String dateFormatted = results.get(0).day + " " + results.get(0).month
+                    + " " + results.get(0).date;
+            weatherViewHolder.currentDate.setText(dateFormatted);
+            weatherViewHolder.currentLocation.setText(results.get(0).location);
+            //weatherViewHolder.currentCondition.setText(results.get(0).conditions);
+            weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
+            weatherViewHolder.day1Name.setText(results.get(0).day);
+        }catch (IndexOutOfBoundsException e){
+
+        }
     }
 
     @Override

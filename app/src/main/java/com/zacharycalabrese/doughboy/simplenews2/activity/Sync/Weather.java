@@ -23,9 +23,22 @@ import java.text.SimpleDateFormat;
  */
 public class Weather {
     private final int DAYS_TO_FETCH = 5;
+    private Boolean updatedWeather;
 
     public Weather(){
+        updatedWeather = false;
+    }
+
+    public void updateWeather(){
         new FetchWeatherTask().execute("11232,USA");
+    }
+
+    private void finishedProcessing(){
+        updatedWeather = true;
+    }
+
+    public Boolean getUpdatedWeather(){
+        return updatedWeather;
     }
 
     private void processJsonResult(String jsonResult){
@@ -200,6 +213,7 @@ public class Weather {
         @Override
         protected void onPostExecute(String result){
             processJsonResult(result);
+            finishedProcessing();
         }
     }
 }

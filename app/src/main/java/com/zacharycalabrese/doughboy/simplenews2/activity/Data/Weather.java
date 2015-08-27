@@ -20,7 +20,7 @@ public class Weather {
         this.arrayOfJsonResults = arrayOfJsonResults;
         splitArrayOfJsonResults = new String[arrayOfJsonResults.length][];
         splitJsonResults();
-        //deleteOldData();
+        deleteOldData();
         writeToDatabase();
     }
 
