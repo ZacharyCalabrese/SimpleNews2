@@ -20,7 +20,8 @@ public class Weather {
         this.arrayOfJsonResults = arrayOfJsonResults;
         splitArrayOfJsonResults = new String[arrayOfJsonResults.length][];
         splitJsonResults();
-        writeToDatabase();
+        deleteOldData();
+        //writeToDatabase();
     }
 
     public List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> getWeekData(){
@@ -37,6 +38,11 @@ public class Weather {
             Pattern pattern = Pattern.compile(Pattern.quote("/"));
             splitArrayOfJsonResults[i] = pattern.split(arrayOfJsonResults[i]);
         }
+    }
+
+    private void deleteOldData(){
+        com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
+                .deleteAll(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather.class);
     }
 
     private void writeToDatabase(){
