@@ -28,15 +28,46 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
-        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        View view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
-        return new WeatherViewHolder(view);
+        LayoutInflater layoutInflater;
+        View view;
+
+        switch (i){
+            case 0:
+                layoutInflater = LayoutInflater.from(viewGroup.getContext());
+                view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
+                return new WeatherViewHolder(view);
+            case 1:
+                layoutInflater = LayoutInflater.from(viewGroup.getContext());
+                view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
+                return new WeatherViewHolder(view);
+            default:
+                return null;
+        }
+
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i){
-        updateWeatherViewHolder(viewHolder);
+        switch(i){
+            case 0:
+                updateWeatherViewHolder(viewHolder);
+                break;
+            case 1:
+                updateWeatherViewHolder(viewHolder);
+                break;
+            default:
+                break;
+        }
+    }
 
+    @Override
+    public int getItemViewType(int position){
+        return position % CARD_COUNT;
+    }
+
+    @Override
+    public int getItemCount(){
+        return CARD_COUNT;
     }
 
     private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
@@ -77,16 +108,6 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }catch (IndexOutOfBoundsException e){
 
         }
-    }
-
-    @Override
-    public int getItemViewType(int position){
-        return position % CARD_COUNT;
-    }
-
-    @Override
-    public int getItemCount(){
-        return CARD_COUNT;
     }
 
     public class WeatherViewHolder extends RecyclerView.ViewHolder{

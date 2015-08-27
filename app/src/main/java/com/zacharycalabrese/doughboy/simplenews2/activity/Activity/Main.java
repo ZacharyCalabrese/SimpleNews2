@@ -1,6 +1,7 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,36 +18,18 @@ import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.Weather;
 public class Main extends ActionBarActivity {
     com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main mainAdapter;
     RecyclerView recyclerView;
-    Thread thread = new Thread() {
-        @Override
-        public void run() {
-            Weather weather = new Weather();
-            weather.updateWeather();
-            while (!weather.getUpdatedWeather()){
-                try {
-                    sleep(1000);
-                }catch (InterruptedException e){
+    SwipeRefreshLayout swipeRefreshLayout;
 
-                }
-            };
-
-            updateWeather();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        drawScreen();
-        thread.start();
-        //updateWeather();
-    }
-
-    private void drawScreen(){
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary_color, R.color.accent_color);
         recyclerView = (RecyclerView) findViewById(R.id.activity_main_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -54,17 +37,43 @@ public class Main extends ActionBarActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mainAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main(this);
         recyclerView.setAdapter(mainAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh(){
+                updateWeather();
+            }
+        });
     }
 
     public void updateWeather(){
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                Weather weather = new Weather();
+                weather.updateWeather();
+                while (!weather.getUpdatedWeather()){
+                    try {
+                        sleep(1000);
+                    }catch (InterruptedException e){
+
+                    }
+                };
+
+                redrawScreen();
+            }
+        };
+        thread.start();
+    }
+
+    private void redrawScreen(){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mainAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-
     }
 
     @Override
