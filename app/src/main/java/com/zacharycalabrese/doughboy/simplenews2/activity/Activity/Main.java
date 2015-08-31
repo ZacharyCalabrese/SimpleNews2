@@ -35,7 +35,7 @@ public class Main extends ActionBarActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mainAdapter = new com.zacharycalabrese.doughboy.simplenews2 .activity.Adapter.Main(this);
+        mainAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main(this);
         recyclerView.setAdapter(mainAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){

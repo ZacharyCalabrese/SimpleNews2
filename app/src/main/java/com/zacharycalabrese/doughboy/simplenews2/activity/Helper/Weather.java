@@ -17,6 +17,7 @@ public class Weather {
     public String pressure;
     public String humidity;
     public String direction;
+    public int conditionImageResourceId;
 
     public Weather(String location, String temperatureHi, String temperatureLow,
                    String temperatureCurrent, String conditions, String cloudiness,
@@ -36,6 +37,23 @@ public class Weather {
         this.pressure = pressure;
         this.humidity = humidity;
         this.direction = direction;
+        this.conditionImageResourceId = 0;
+    }
 
+    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather weatherModel){
+        this.location = weatherModel.location;
+        this.temperatureHi = weatherModel.temperatureHi;
+        this.temperatureLow = weatherModel.temperatureLow;
+        this.temperatureCurrent = weatherModel.temperatureCurrent;
+        this.conditions = weatherModel.conditions;
+        this.cloudiness = weatherModel.cloudiness;
+        this.windiness = weatherModel.windiness;
+        this.day = weatherModel.day;
+        this.date = weatherModel.date;
+        this.month = weatherModel.month;
+        this.pressure = weatherModel.pressure;
+        this.humidity = weatherModel.humidity;
+        this.direction = weatherModel.direction;
+        this.conditionImageResourceId = 0;
     }
 }

@@ -24,6 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.Activity.Weather"
+            android:label="@string/activity_weather_name">
+
+        </activity>
+
     </application>
 
 </manifest>

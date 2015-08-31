@@ -162,6 +162,7 @@ public class Weather {
 
                 try{
                     url = new URL(builtUri.toString());
+                    Log.v("Weather API string: ", builtUri.toString());
                 }catch (MalformedURLException e) {
                     Log.e("Error: ", "url built incorrectly");
                     return null;

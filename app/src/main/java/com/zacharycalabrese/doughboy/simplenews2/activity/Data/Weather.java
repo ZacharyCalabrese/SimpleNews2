@@ -9,6 +9,7 @@ import com.zacharycalabrese.doughboy.simplenews2.R;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -67,22 +68,39 @@ public class Weather {
         icWindy = context.getResources().getStringArray(R.array.ic_windy);
     }
 
-    public List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> getWeekData(){
+    public List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> getWeekData(){
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results =
                 com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
                         .listAll(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
                                 .class);
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> helperWeatherList;
+        helperWeatherList = initilizeHelperWeatherList(results);
+        helperWeatherList = processTemperatures(helperWeatherList);
+        helperWeatherList = processConditions(helperWeatherList);
 
-        results = processTemperatures(results);
-        results = processConditions(results);
-
-        return results;
+        return helperWeatherList;
     }
 
-    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> processTemperatures
-            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results){
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather>
+    initilizeHelperWeatherList(
+            List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> data){
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather res: results){
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> returningList;
+        returningList = new ArrayList<>();
+
+        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather item : data){
+            com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather temp;
+            temp = new com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather(item);
+            returningList.add(temp);
+        }
+
+        return returningList;
+    }
+
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processTemperatures
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
+
+        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
             res.temperatureCurrent = getCelsiusOrFahrenheit(roundOff(res.temperatureCurrent));
             res.temperatureHi = getCelsiusOrFahrenheit(roundOff(res.temperatureHi));
             res.temperatureLow = getCelsiusOrFahrenheit(roundOff(res.temperatureLow));
@@ -110,11 +128,11 @@ public class Weather {
         }
     }
 
-    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> processConditions
-            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results){
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processConditions
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather res: results){
-            res.conditions = Integer.toString(getImageResource(res.conditions));
+        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
+            res.conditionImageResourceId = getImageResource(res.conditions);
         }
 
         return results;

@@ -1,6 +1,7 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather;
 
@@ -71,7 +73,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
         Weather weather = new Weather(context);
-        List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results
                 = weather.getWeekData();
 
         WeatherViewHolder weatherViewHolder = (WeatherViewHolder)viewHolder;
@@ -82,28 +84,36 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             weatherViewHolder.currentDate.setText(dateFormatted);
             weatherViewHolder.currentLocation.setText(results.get(0).location);
-            weatherViewHolder.currentCondition.setImageResource(Integer.parseInt(results.get(0).conditions));
+            weatherViewHolder.currentCondition.setImageResource(results.get(0).conditionImageResourceId);
             weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
             weatherViewHolder.day1Name.setText(results.get(0).day);
             weatherViewHolder.day1Hi.setText(results.get(0).temperatureHi);
             weatherViewHolder.day1Low.setText(results.get(0).temperatureLow);
-            weatherViewHolder.day1Condition.setImageResource(Integer.parseInt(results.get(0).conditions));
+            weatherViewHolder.day1Condition.setImageResource(results.get(0).conditionImageResourceId);
             weatherViewHolder.day2Name.setText(results.get(1).day);
             weatherViewHolder.day2Hi.setText(results.get(1).temperatureHi);
             weatherViewHolder.day2Low.setText(results.get(1).temperatureLow);
-            weatherViewHolder.day2Condition.setImageResource(Integer.parseInt(results.get(1).conditions));
+            weatherViewHolder.day2Condition.setImageResource(results.get(1).conditionImageResourceId);
             weatherViewHolder.day3Name.setText(results.get(2).day);
             weatherViewHolder.day3Hi.setText(results.get(2).temperatureHi);
             weatherViewHolder.day3Low.setText(results.get(2).temperatureLow);
-            weatherViewHolder.day3Condition.setImageResource(Integer.parseInt(results.get(2).conditions));
+            weatherViewHolder.day3Condition.setImageResource(results.get(2).conditionImageResourceId);
             weatherViewHolder.day4Name.setText(results.get(3).day);
             weatherViewHolder.day4Hi.setText(results.get(3).temperatureHi);
             weatherViewHolder.day4Low.setText(results.get(3).temperatureLow);
-            weatherViewHolder.day4Condition.setImageResource(Integer.parseInt(results.get(3).conditions));
+            weatherViewHolder.day4Condition.setImageResource(results.get(3).conditionImageResourceId);
             weatherViewHolder.day5Name.setText(results.get(4).day);
             weatherViewHolder.day5Hi.setText(results.get(4).temperatureHi);
             weatherViewHolder.day5Low.setText(results.get(4).temperatureLow);
-            weatherViewHolder.day5Condition.setImageResource(Integer.parseInt(results.get(4).conditions));
+            weatherViewHolder.day5Condition.setImageResource(results.get(4).conditionImageResourceId);
+            weatherViewHolder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,
+                            com.zacharycalabrese.doughboy.simplenews2.activity.Activity.Weather.class);
+                    context.startActivity(intent);
+                }
+            });
         }catch (IndexOutOfBoundsException e){
 
         }
@@ -134,6 +144,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected ImageView day3Condition;
         protected ImageView day4Condition;
         protected ImageView day5Condition;
+        protected FloatingActionButton floatingActionButton;
 
         public WeatherViewHolder(View v){
             super(v);
@@ -161,6 +172,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             day3Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_3);
             day4Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_4);
             day5Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_5);
+            floatingActionButton = (FloatingActionButton) v.findViewById(R.id.viewholder_main_weather_fab);
         }
 
     }
