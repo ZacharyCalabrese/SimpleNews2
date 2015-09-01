@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Switch;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 
@@ -77,6 +78,7 @@ public class Weather {
         helperWeatherList = initilizeHelperWeatherList(results);
         helperWeatherList = processTemperatures(helperWeatherList);
         helperWeatherList = processConditions(helperWeatherList);
+        helperWeatherList = processWind(helperWeatherList);
 
         return helperWeatherList;
     }
@@ -138,6 +140,17 @@ public class Weather {
         return results;
     }
 
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processWind
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
+
+        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
+            res.direction = getWindSpeed(res.direction);
+            res.windSpeedAndDirection = res.direction + " " + getWindDirection(res.windiness);
+        }
+
+        return results;
+    }
+
     private int getImageResource(String condition){
         if (stringContainsItemFromList(condition, icCloudy)) {
             return R.mipmap.ic_cloudy;
@@ -183,6 +196,50 @@ public class Weather {
             }
         }
         return false;
+    }
+
+    private String getWindSpeed(String speed){
+        Double speedInIntMetersPerSecond;
+        speedInIntMetersPerSecond = Double.parseDouble(speed);
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
+        Double metersToKmConversion = 3.6;
+        Double metersToMphConversion = 2.23694;
+
+
+        if (SP.getBoolean("metric_or_imperial", true)) {
+            speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToKmConversion;
+            String speedInKilometersPerHour = Double.toString(speedInIntMetersPerSecond);
+            return speedInKilometersPerHour + " km/h";
+        }else{
+            speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToMphConversion;
+            String speedInMilersPerHour = Double.toString(speedInIntMetersPerSecond);
+            return speedInMilersPerHour + "mph";
+        }
+    }
+
+    private String getWindDirection(String degrees){
+        int degreesInInt;
+        degreesInInt = Integer.parseInt(degrees);
+
+        if(degreesInInt < 15)
+            return "E";
+        else if(degreesInInt < 75)
+            return "NE";
+        else if(degreesInInt < 105)
+            return "N";
+        else if(degreesInInt < 165)
+            return "NW";
+        else if(degreesInInt < 195)
+            return "E";
+        else if(degreesInInt < 255)
+            return "SW";
+        else if(degreesInInt < 285)
+            return "S";
+        else if(degreesInInt < 345)
+            return "SE";
+        else
+            return "E";
+
     }
 
     private void splitJsonResults(){

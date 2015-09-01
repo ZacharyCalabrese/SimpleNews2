@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.Weather;
+
+import java.util.Arrays;
 
 
 public class Main extends ActionBarActivity {
@@ -24,6 +27,9 @@ public class Main extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ifFirstTimeRunning();
+        initializeSourcesDatabase();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -44,6 +50,23 @@ public class Main extends ActionBarActivity {
                 updateWeather();
             }
         });
+    }
+
+    private void initializeSourcesDatabase(){
+        String [] sourcesNamesArray = this.getResources().getStringArray(R.array.base_sources_names);
+        String [] sourcesUrlArray = this.getResources().getStringArray(R.array.base_sources_rss_url);
+
+        for(String source : sourcesNamesArray){
+
+            String[] parts;
+            parts = source.split("\\:");
+
+            String category = parts[0];
+            String name = parts[1];
+            String rssUrl = sourcesUrlArray[Arrays.asList(sourcesNamesArray).indexOf(source)];
+
+            Log.v("URL", rssUrl);
+        }
     }
 
     public void updateWeather(){

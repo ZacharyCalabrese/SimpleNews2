@@ -30,7 +30,13 @@ public class Weather extends ActionBarActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        weatherAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Weather(this);
+
+        com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather weatherData =
+                new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather(this);
+
+
+        weatherAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Weather(
+                this, weatherData.getWeekData());
         recyclerView.setAdapter(weatherAdapter);
 
     }

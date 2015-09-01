@@ -17,6 +17,7 @@ public class Weather {
     public String pressure;
     public String humidity;
     public String direction;
+    public String windSpeedAndDirection;
     public int conditionImageResourceId;
 
     public Weather(String location, String temperatureHi, String temperatureLow,
@@ -54,6 +55,7 @@ public class Weather {
         this.pressure = weatherModel.pressure;
         this.humidity = weatherModel.humidity;
         this.direction = weatherModel.direction;
+        this.windSpeedAndDirection = "";
         this.conditionImageResourceId = 0;
     }
 }

@@ -72,6 +72,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
+        final String DEGREE  = "\u00b0";
         Weather weather = new Weather(context);
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results
                 = weather.getWeekData();
@@ -85,7 +86,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             weatherViewHolder.currentDate.setText(dateFormatted);
             weatherViewHolder.currentLocation.setText(results.get(0).location);
             weatherViewHolder.currentCondition.setImageResource(results.get(0).conditionImageResourceId);
-            weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent);
+            weatherViewHolder.currentTemperature.setText(results.get(0).temperatureCurrent + DEGREE);
             weatherViewHolder.day1Name.setText(results.get(0).day);
             weatherViewHolder.day1Hi.setText(results.get(0).temperatureHi);
             weatherViewHolder.day1Low.setText(results.get(0).temperatureLow);

@@ -110,47 +110,46 @@
     </string-array>
 
     <string-array name="base_sources_names">
-        <item>ESPN - NFL</item>
-        <item>ESPN - NBA</item>
-        <item>ESPN - MLB</item>
-        <item>ESPN - NHL</item>
-        <item>ESPN - Motorsports</item>
-        <item>ESPN - Soccer</item>
-        <item>ESPN - NCAABB</item>
-        <item>ESPN - NCAAF</item>
-        <item>NYTimes - Homepage</item>
-        <item>NYTimes - World</item>
-        <item>NYTimes - U.S.</item>
-        <item>NYTimes - Politics</item>
-        <item>NYTimes - Business</item>
-        <item>NYTimes - Technology</item>
-        <item>NYTimes - Sports</item>
-        <item>NYTimes - Science</item>
-        <item>NYTimes - Health</item>
-        <item>NYTimes - Arts</item>
-        <item>NYTimes - Dining</item>
-        <item>Reuters - Arts</item>
-        <item>Reuters - Business</item>
-        <item>Reuters - Entertainment</item>
-        <item>Reuters - Health</item>
-        <item>Reuters - Lifestyle</item>
-        <item>Reuters - Money</item>
-        <item>Reuters - Politics</item>
-        <item>Reuters - Science</item>
-        <item>Reuters - Sports</item>
-        <item>Reuters - Technology</item>
-        <item>Reuters - Top News</item>
-        <item>Reuters - U.S. News</item>
-        <item>Reuters - World News</item>
-        <item>BBC - Top Stories</item>
-        <item>BBC - World</item>
-        <item>BBC - UK</item>
-        <item>BBC - Business</item>
-        <item>BBC - Politics</item>
-        <item>BBC - Health</item>
-        <item>BBC - Science</item>
-        <item>BBC - Technology</item>
-        <item>BBC - Entertainment</item>
+        <item>Sports: ESPN - NFL</item>
+        <item>Sports: ESPN - NBA</item>
+        <item>Sports: ESPN - MLB</item>
+        <item>Sports: ESPN - NHL</item>
+        <item>Sports: ESPN - Motorsports</item>
+        <item>Sports: ESPN - Soccer</item>
+        <item>Sports: ESPN - NCAABB</item>
+        <item>Sports: ESPN - NCAAF</item>
+        <item>World: NYTimes - Homepage</item>
+        <item>World: NYTimes - World</item>
+        <item>U.S.: NYTimes - U.S.</item>
+        <item>Politics: NYTimes - Politics</item>
+        <item>Business: NYTimes - Business</item>
+        <item>Technology: NYTimes - Technology</item>
+        <item>Sports: NYTimes - Sports</item>
+        <item>Science: NYTimes - Science</item>
+        <item>Health: NYTimes - Health</item>
+        <item>Arts: NYTimes - Arts</item>
+        <item>Food: NYTimes - Dining</item>
+        <item>Arts: Reuters - Arts</item>
+        <item>Business: Reuters - Business</item>
+        <item>Entertainment: Reuters - Entertainment</item>
+        <item>Health: Reuters - Health</item>
+        <item>Entertainment: Reuters - Lifestyle</item>
+        <item>Business: Reuters - Money</item>
+        <item>Politics: Reuters - Politics</item>
+        <item>Science: Reuters - Science</item>
+        <item>Sports: Reuters - Sports</item>
+        <item>Technology: Reuters - Technology</item>
+        <item>World: Reuters - Top News</item>
+        <item>U.S.: Reuters - U.S. News</item>
+        <item>World: Reuters - World News</item>
+        <item>World: BBC - Top Stories</item>
+        <item>World: BBC - World</item>
+        <item>Business: BBC - Business</item>
+        <item>Politics: BBC - Politics</item>
+        <item>Health: BBC - Health</item>
+        <item>Science: BBC - Science</item>
+        <item>Technology: BBC - Technology</item>
+        <item>Entertainment: BBC - Entertainment</item>
 
     </string-array>
 
@@ -197,6 +196,45 @@
         <item>http://feeds.bbci.co.uk/news/technology/rss.xml</item>
         <item>http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml</item>
 
+    </string-array>
+
+    <string-array name="categoryArray">
+        <item>World</item>
+        <item>U.S.</item>
+        <item>Politics</item>
+        <item>Technology</item>
+        <item>Sports</item>
+        <item>Business</item>
+        <item>Science</item>
+        <item>Food</item>
+        <item>Health</item>
+        <item>Arts</item>
+    </string-array>
+
+    <string-array name="categoryValues">
+        <item>1 World</item>
+        <item>2 U.S.</item>
+        <item>3 Politics</item>
+        <item>4 Technology</item>
+        <item>5 Sports</item>
+        <item>6 Business</item>
+        <item>7 Science</item>
+        <item>8 Food</item>
+        <item>9 Health</item>
+        <item>10 Arts</item>
+    </string-array>
+
+    <string-array name="categoryDefaultValues">
+        <item>1 World</item>
+        <item>2 U.S.</item>
+        <item>3 Politics</item>
+        <item>4 Technology</item>
+        <item>5 Sports</item>
+        <item>6 Business</item>
+        <item>7 Science</item>
+        <item>8 Food</item>
+        <item>9 Health</item>
+        <item>10 Arts</item>
     </string-array>
 
 </resources>

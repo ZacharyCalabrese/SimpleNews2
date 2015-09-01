@@ -9,7 +9,6 @@ public class News extends SugarRecord<News> {
     public String title;
     public String link;
     public String description;
-    public String category;
     public String pubdate;
     public String timestamp;
     public Source source;
@@ -18,12 +17,11 @@ public class News extends SugarRecord<News> {
 
     }
 
-    public News(String title, String link, String description, String category, String pubdate,
+    public News(String title, String link, String description, String pubdate,
                 Source source){
         this.title = title;
         this.link = link;
         this.description = description;
-        this.category = category;
         this.pubdate = pubdate;
         this.source = source;
         this.timestamp = ((Long) System.currentTimeMillis()).toString();

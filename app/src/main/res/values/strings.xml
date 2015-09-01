@@ -13,4 +13,15 @@
     <string name="viewholder_main_news_card_title">News</string>
     <string name="viewholder_main_news_temporary_headline">Headline</string>
     <string name="viewholder_main_news_top_news">Top Headlines</string>
+    <string name="viewholder_weather_conditions">Conditions</string>
+    <string name="viewholder_weather_date">Date</string>
+    <string name="viewholder_weather_image_view">Current Weather</string>
+    <string name="viewholder_weather_humidity">Humidity</string>
+    <string name="viewholder_weather_null">Null</string>
+    <string name="viewholder_weather_wind">Wind</string>
+    <string name="viewholder_weather_pressure">Pressure</string>
+    <string name="viewholder_weather_cloudiness">Cloudiness</string>
+    <string name="viewholder_weather_temperature_placeholder">50</string>
+
+
 </resources>
