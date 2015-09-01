@@ -2,6 +2,7 @@ package com.zacharycalabrese.doughboy.simplenews2.activity.Model;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,13 @@ public class Source extends SugarRecord<Source>{
         this.rssUrl = rssUrl;
         this.category = category;
         this.subscribed = subscribed;
+    }
+
+    public Source(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source source){
+        this.name = source.name;
+        this.rssUrl = source.rssUrl;
+        this.category = source.category;
+        this.subscribed = source.subscribed;
     }
 
     public List<News> getArticles(){

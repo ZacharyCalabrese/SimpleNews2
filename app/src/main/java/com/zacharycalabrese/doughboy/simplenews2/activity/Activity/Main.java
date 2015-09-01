@@ -1,18 +1,19 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
+import com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source;
+import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.News;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.Weather;
 
 import java.util.Arrays;
@@ -29,7 +30,6 @@ public class Main extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         ifFirstTimeRunning();
-        initializeSourcesDatabase();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,6 +52,14 @@ public class Main extends ActionBarActivity {
         });
     }
 
+    private void ifFirstTimeRunning(){
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(this);
+        if (SP.getBoolean("first_time_running", true)) {
+            initializeSourcesDatabase();
+            updateNewsSources();
+        }
+    }
+
     private void initializeSourcesDatabase(){
         String [] sourcesNamesArray = this.getResources().getStringArray(R.array.base_sources_names);
         String [] sourcesUrlArray = this.getResources().getStringArray(R.array.base_sources_rss_url);
@@ -65,11 +73,22 @@ public class Main extends ActionBarActivity {
             String name = parts[1];
             String rssUrl = sourcesUrlArray[Arrays.asList(sourcesNamesArray).indexOf(source)];
 
-            Log.v("URL", rssUrl);
+            Source source1 = new Source(name, category, rssUrl, true);
+            com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source dataSource =
+                    new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source();
+
+
+            dataSource.addSource(source1);
+
         }
     }
 
-    public void updateWeather(){
+    private void updateNewsSources(){
+        News news = new News();
+        news.fetchLatestNews();
+    }
+
+    private void updateWeather(){
         Thread thread = new Thread() {
             @Override
             public void run() {
