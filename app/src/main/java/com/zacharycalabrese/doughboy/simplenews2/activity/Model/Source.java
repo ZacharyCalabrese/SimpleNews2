@@ -18,7 +18,7 @@ public class Source extends SugarRecord<Source>{
 
     }
 
-    public Source(String name, String baseUrl, String rssUrl, String category, Boolean subscribed){
+    public Source(String name, String rssUrl, String category, Boolean subscribed){
         this.name = name;
         this.rssUrl = rssUrl;
         this.category = category;

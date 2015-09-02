@@ -73,18 +73,19 @@ public class Main extends ActionBarActivity {
             String name = parts[1];
             String rssUrl = sourcesUrlArray[Arrays.asList(sourcesNamesArray).indexOf(source)];
 
-            Source source1 = new Source(name, category, rssUrl, true);
+            Source source1 = new Source(name, rssUrl, category, true);
             com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source dataSource =
                     new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source();
 
 
-            dataSource.addSource(source1);
 
+            dataSource.addSource(source1);
         }
+
     }
 
     private void updateNewsSources(){
-        News news = new News();
+        News news = new News(this);
         news.fetchLatestNews();
     }
 
