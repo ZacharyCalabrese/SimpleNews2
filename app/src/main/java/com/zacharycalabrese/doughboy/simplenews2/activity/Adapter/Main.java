@@ -2,7 +2,9 @@ package com.zacharycalabrese.doughboy.simplenews2.activity.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,12 @@ import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.zacharycalabrese.doughboy.simplenews2.R;
+import com.zacharycalabrese.doughboy.simplenews2.activity.Data.News;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather;
 
 import org.w3c.dom.Text;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,6 +59,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 updateWeatherViewHolder(viewHolder);
                 break;
             case 1:
+                updateNewsViewHolder(viewHolder);
                 break;
             default:
                 break;
@@ -118,6 +123,41 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }catch (IndexOutOfBoundsException e){
 
         }
+    }
+
+    private void updateNewsViewHolder(RecyclerView.ViewHolder viewHolder){
+        NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
+        News news = new News(context);
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.News> newsHelper =
+                news.getLatestHeadlines();
+
+        Collections.reverse(newsHelper);
+        try {
+            setHeadline(newsViewHolder.headline1, newsHelper.get(0).title, newsHelper.get(0).link);
+            setHeadline(newsViewHolder.headline2, newsHelper.get(1).title, newsHelper.get(1).link);
+            setHeadline(newsViewHolder.headline3, newsHelper.get(2).title, newsHelper.get(2).link);
+            setHeadline(newsViewHolder.headline4, newsHelper.get(3).title, newsHelper.get(3).link);
+            setHeadline(newsViewHolder.headline5, newsHelper.get(4).title, newsHelper.get(4).link);
+            setHeadline(newsViewHolder.headline6, newsHelper.get(5).title, newsHelper.get(5).link);
+            setHeadline(newsViewHolder.headline7, newsHelper.get(6).title, newsHelper.get(6).link);
+            setHeadline(newsViewHolder.headline8, newsHelper.get(7).title, newsHelper.get(7).link);
+            setHeadline(newsViewHolder.headline9, newsHelper.get(8).title, newsHelper.get(8).link);
+            setHeadline(newsViewHolder.headline10, newsHelper.get(9).title, newsHelper.get(9).link);
+        }catch (IndexOutOfBoundsException e){
+            Log.e("Error", "Index out of bounds");
+        }
+    }
+
+    private void setHeadline(TextView textView, String title, final String url){
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(url));
+                context.startActivity(intent);
+            }
+        });
+        textView.setText(title);
     }
 
     public class WeatherViewHolder extends RecyclerView.ViewHolder{

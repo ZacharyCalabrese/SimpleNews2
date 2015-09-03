@@ -32,4 +32,12 @@ public class News {
         this.pubdate = rssItem.getPubDate().toString();
         this.source = source;
     }
+
+    public News(com.zacharycalabrese.doughboy.simplenews2.activity.Model.News news){
+        this.title = news.title;
+        this.link = news.link;
+        this.description = news.description;
+        this.pubdate = news.pubdate;
+        this.source = news.source;
+    }
 }

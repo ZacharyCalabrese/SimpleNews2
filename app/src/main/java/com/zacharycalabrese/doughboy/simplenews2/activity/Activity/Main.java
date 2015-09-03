@@ -47,16 +47,39 @@ public class Main extends ActionBarActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh(){
-                updateWeather();
+                updateWeatherAndNews();;
             }
         });
+    }
+
+    private void updateWeatherAndNews(){
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                Weather weather = new Weather();
+                weather.updateWeather();
+
+                News news = new News(getApplicationContext());
+                news.fetchLatestNews();
+
+                while (!news.getUpdatedNews()){
+                    try {
+                        sleep(1000);
+                    }catch (InterruptedException e){
+
+                    }
+                };
+
+                redrawScreen();
+            }
+        };
+        thread.start();
     }
 
     private void ifFirstTimeRunning(){
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(this);
         if (SP.getBoolean("first_time_running", true)) {
             initializeSourcesDatabase();
-            updateNewsSources();
         }
     }
 
@@ -76,8 +99,6 @@ public class Main extends ActionBarActivity {
             Source source1 = new Source(name, rssUrl, category, true);
             com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source dataSource =
                     new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source();
-
-
 
             dataSource.addSource(source1);
         }
