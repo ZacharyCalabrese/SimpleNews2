@@ -1,8 +1,6 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
-import android.app.Notification;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +16,7 @@ public class Weather extends ActionBarActivity {
     com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Weather weatherAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_weather);

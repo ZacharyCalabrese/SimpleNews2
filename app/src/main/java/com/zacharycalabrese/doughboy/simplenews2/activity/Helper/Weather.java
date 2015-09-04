@@ -23,7 +23,7 @@ public class Weather {
     public Weather(String location, String temperatureHi, String temperatureLow,
                    String temperatureCurrent, String conditions, String cloudiness,
                    String windiness, String day, String date, String month,
-                   String pressure, String humidity, String direction){
+                   String pressure, String humidity, String direction) {
 
         this.location = location;
         this.temperatureHi = temperatureHi;
@@ -41,7 +41,7 @@ public class Weather {
         this.conditionImageResourceId = 0;
     }
 
-    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather weatherModel){
+    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather weatherModel) {
         this.location = weatherModel.location;
         this.temperatureHi = weatherModel.temperatureHi;
         this.temperatureLow = weatherModel.temperatureLow;

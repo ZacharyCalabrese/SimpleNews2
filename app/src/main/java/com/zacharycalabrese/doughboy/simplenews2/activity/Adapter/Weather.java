@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
@@ -23,14 +21,14 @@ public class Weather extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public Weather(Context context,
                    List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather>
-                           weatherList){
+                           weatherList) {
 
         this.context = context;
         this.weatherList = weatherList;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.viewholder_weather, viewGroup, false);
 
@@ -38,8 +36,8 @@ public class Weather extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i){
-        final String DEGREE  = "\u00b0";
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        final String DEGREE = "\u00b0";
         final String PERCENTAGE = "%";
         final String PRESSURE = " hPa";
         WeatherViewHolder weatherViewHolder = (WeatherViewHolder) viewHolder;
@@ -59,16 +57,16 @@ public class Weather extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         return position % weatherList.size();
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return weatherList.size();
     }
 
-    public class WeatherViewHolder extends RecyclerView.ViewHolder{
+    public class WeatherViewHolder extends RecyclerView.ViewHolder {
         protected TextView currentDate;
         protected TextView currentConditions;
         protected TextView temperatureHi;
@@ -79,7 +77,7 @@ public class Weather extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView cloudiness;
         protected ImageView conditions;
 
-        public WeatherViewHolder(View v){
+        public WeatherViewHolder(View v) {
             super(v);
 
             currentDate = (TextView) v.findViewById(R.id.viewholder_weather_date);

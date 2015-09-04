@@ -3,8 +3,6 @@ package com.zacharycalabrese.doughboy.simplenews2.activity.Data;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.Switch;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 
@@ -37,13 +35,13 @@ public class Weather {
     private String[] icTornado;
     private String[] icWindy;
 
-    public Weather(Context context){
+    public Weather(Context context) {
         this.context = context;
 
         initializeWeatherArrays();
     }
 
-    public Weather(String[] arrayOfJsonResults){
+    public Weather(String[] arrayOfJsonResults) {
         this.arrayOfJsonResults = arrayOfJsonResults;
         splitArrayOfJsonResults = new String[arrayOfJsonResults.length][];
         splitJsonResults();
@@ -51,7 +49,16 @@ public class Weather {
         writeToDatabase();
     }
 
-    private void initializeWeatherArrays(){
+    private static boolean stringContainsItemFromList(String inputString, String[] items) {
+        for (String item : items) {
+            if (inputString.toLowerCase().contains(item.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void initializeWeatherArrays() {
         icCloudy = context.getResources().getStringArray(R.array.ic_cloudy);
         icFreeze = context.getResources().getStringArray(R.array.ic_freeze);
         icLightCloud = context.getResources().getStringArray(R.array.ic_light_cloud);
@@ -69,7 +76,7 @@ public class Weather {
         icWindy = context.getResources().getStringArray(R.array.ic_windy);
     }
 
-    public List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> getWeekData(){
+    public List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> getWeekData() {
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> results =
                 com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
                         .listAll(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
@@ -85,12 +92,12 @@ public class Weather {
 
     private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather>
     initilizeHelperWeatherList(
-            List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> data){
+            List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather> data) {
 
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> returningList;
         returningList = new ArrayList<>();
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather item : data){
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather item : data) {
             com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather temp;
             temp = new com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather(item);
             returningList.add(temp);
@@ -100,9 +107,9 @@ public class Weather {
     }
 
     private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processTemperatures
-            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results) {
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res : results) {
             res.temperatureCurrent = getCelsiusOrFahrenheit(roundOff(res.temperatureCurrent));
             res.temperatureHi = getCelsiusOrFahrenheit(roundOff(res.temperatureHi));
             res.temperatureLow = getCelsiusOrFahrenheit(roundOff(res.temperatureLow));
@@ -111,7 +118,7 @@ public class Weather {
         return results;
     }
 
-    private String roundOff(String value){
+    private String roundOff(String value) {
         Double val = Double.parseDouble(value);
         BigDecimal bd = new BigDecimal(val);
         bd = bd.setScale(0, RoundingMode.HALF_UP);
@@ -119,21 +126,21 @@ public class Weather {
         return Integer.toString(val.intValue());
     }
 
-    private String getCelsiusOrFahrenheit(String value){
+    private String getCelsiusOrFahrenheit(String value) {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
         if (SP.getBoolean("fahrenheit_or_celsius", true)) {
             double celsiusValue = Double.parseDouble(value);
             double fahrenheitValue = (9.0 / 5.0) * celsiusValue + 32;
             return Integer.toString((int) fahrenheitValue);
-        }else {
+        } else {
             return value;
         }
     }
 
     private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processConditions
-            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results) {
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res : results) {
             res.conditionImageResourceId = getImageResource(res.conditions);
         }
 
@@ -141,9 +148,9 @@ public class Weather {
     }
 
     private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processWind
-            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results){
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results) {
 
-        for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res: results){
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res : results) {
             res.direction = getWindSpeed(res.direction);
             res.windSpeedAndDirection = res.direction + " " + getWindDirection(res.windiness);
         }
@@ -151,7 +158,7 @@ public class Weather {
         return results;
     }
 
-    private int getImageResource(String condition){
+    private int getImageResource(String condition) {
         if (stringContainsItemFromList(condition, icCloudy)) {
             return R.mipmap.ic_cloudy;
         } else if (stringContainsItemFromList(condition, icFreeze)) {
@@ -184,21 +191,12 @@ public class Weather {
             return R.mipmap.ic_windy;
         } else if (stringContainsItemFromList(condition, icMildThunderstorm)) {
             return R.mipmap.ic_mild_thunderstorm;
-        }else {
+        } else {
             return R.mipmap.ic_tornado;
         }
     }
 
-    private static boolean stringContainsItemFromList(String inputString, String[] items) {
-        for (String item : items) {
-            if (inputString.toLowerCase().contains(item.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private String getWindSpeed(String speed){
+    private String getWindSpeed(String speed) {
         Double speedInIntMetersPerSecond;
         speedInIntMetersPerSecond = Double.parseDouble(speed);
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
@@ -210,52 +208,52 @@ public class Weather {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToKmConversion;
             String speedInKilometersPerHour = Double.toString(speedInIntMetersPerSecond);
             return speedInKilometersPerHour + " km/h";
-        }else{
+        } else {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToMphConversion;
             String speedInMilersPerHour = Double.toString(speedInIntMetersPerSecond);
             return speedInMilersPerHour + "mph";
         }
     }
 
-    private String getWindDirection(String degrees){
+    private String getWindDirection(String degrees) {
         int degreesInInt;
         degreesInInt = Integer.parseInt(degrees);
 
-        if(degreesInInt < 15)
+        if (degreesInInt < 15)
             return "E";
-        else if(degreesInInt < 75)
+        else if (degreesInInt < 75)
             return "NE";
-        else if(degreesInInt < 105)
+        else if (degreesInInt < 105)
             return "N";
-        else if(degreesInInt < 165)
+        else if (degreesInInt < 165)
             return "NW";
-        else if(degreesInInt < 195)
+        else if (degreesInInt < 195)
             return "E";
-        else if(degreesInInt < 255)
+        else if (degreesInInt < 255)
             return "SW";
-        else if(degreesInInt < 285)
+        else if (degreesInInt < 285)
             return "S";
-        else if(degreesInInt < 345)
+        else if (degreesInInt < 345)
             return "SE";
         else
             return "E";
 
     }
 
-    private void splitJsonResults(){
-        for(int i = 0; i < arrayOfJsonResults.length; i++){
+    private void splitJsonResults() {
+        for (int i = 0; i < arrayOfJsonResults.length; i++) {
             Pattern pattern = Pattern.compile(Pattern.quote("/"));
             splitArrayOfJsonResults[i] = pattern.split(arrayOfJsonResults[i]);
         }
     }
 
-    private void deleteOldData(){
+    private void deleteOldData() {
         com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather
                 .deleteAll(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Weather.class);
     }
 
-    private void writeToDatabase(){
-        for(String[] workingDay : splitArrayOfJsonResults){
+    private void writeToDatabase() {
+        for (String[] workingDay : splitArrayOfJsonResults) {
             Pattern pattern = Pattern.compile(Pattern.quote(" "));
             String[] dayDateMonth = pattern.split(workingDay[0]);
 

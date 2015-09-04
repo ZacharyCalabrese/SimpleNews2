@@ -25,34 +25,34 @@ public class Weather {
     private final int DAYS_TO_FETCH = 5;
     private Boolean updatedWeather;
 
-    public Weather(){
+    public Weather() {
         updatedWeather = false;
     }
 
-    public void updateWeather(){
+    public void updateWeather() {
         new FetchWeatherTask().execute("11232,USA");
     }
 
-    private void finishedProcessing(){
+    private void finishedProcessing() {
         updatedWeather = true;
     }
 
-    public Boolean getUpdatedWeather(){
+    public Boolean getUpdatedWeather() {
         return updatedWeather;
     }
 
-    private void processJsonResult(String jsonResult){
+    private void processJsonResult(String jsonResult) {
         try {
             String[] results = getWeatherDataFromJson(jsonResult);
 
             new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather(results);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             Log.e("Error: ", "Json exception");
         }
     }
 
     private String[] getWeatherDataFromJson(String json)
-            throws JSONException{
+            throws JSONException {
         String OWM_CITY = "city";
         String OWM_CITYNAME = "name";
         String OWM_LIST = "list";
@@ -81,7 +81,7 @@ public class Weather {
         JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
         String[] resultStringInArray = new String[DAYS_TO_FETCH];
 
-        for(int i = 0; i < weatherArray.length(); i++){
+        for (int i = 0; i < weatherArray.length(); i++) {
             String day;
             String description;
             String pressure;
@@ -95,7 +95,7 @@ public class Weather {
             long dateTime = dayTime.setJulianDay(julianStartDay + i);
 
             SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
-            day =  shortenedDateFormat.format(dateTime);
+            day = shortenedDateFormat.format(dateTime);
 
             pressure = dayForecast.getString(OWM_PRESSURE);
             humidity = dayForecast.getString(OWM_HUMIDITY);
@@ -121,14 +121,14 @@ public class Weather {
 
     }
 
-    public class FetchWeatherTask extends AsyncTask<String, Void, String>{
-        public FetchWeatherTask(){
+    public class FetchWeatherTask extends AsyncTask<String, Void, String> {
+        public FetchWeatherTask() {
             super();
         }
 
         @Override
-        protected String doInBackground(String... params){
-            if(params.length == 0){
+        protected String doInBackground(String... params) {
+            if (params.length == 0) {
                 return null;
             }
 
@@ -142,7 +142,7 @@ public class Weather {
 
             URL url = null;
 
-            try{
+            try {
                 final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
                 final String QUERY_PARAM = "q";
                 final String FORMAT_PARAM = "mode";
@@ -159,11 +159,10 @@ public class Weather {
                         .build();
 
 
-
-                try{
+                try {
                     url = new URL(builtUri.toString());
                     Log.v("Weather API string: ", builtUri.toString());
-                }catch (MalformedURLException e) {
+                } catch (MalformedURLException e) {
                     Log.e("Error: ", "url built incorrectly");
                     return null;
                 }
@@ -175,7 +174,7 @@ public class Weather {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 StringBuffer stringBuffer = new StringBuffer();
 
-                if (inputStream == null){
+                if (inputStream == null) {
                     return null;
                 }
 
@@ -183,26 +182,26 @@ public class Weather {
 
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuffer.append(line + "\n");
                 }
 
-                if(stringBuffer.length() == 0){
+                if (stringBuffer.length() == 0) {
                     return null;
                 }
 
                 forecastJsonStr = stringBuffer.toString();
-            }catch (IOException e){
+            } catch (IOException e) {
                 Log.e("Error: ", "IO exception");
-            }finally {
-                if(httpURLConnection != null){
+            } finally {
+                if (httpURLConnection != null) {
                     httpURLConnection.disconnect();
                 }
 
-                if(bufferedReader != null){
-                    try{
+                if (bufferedReader != null) {
+                    try {
                         bufferedReader.close();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         Log.e("Error: ", "couldn't close buffered reader");
                     }
                 }
@@ -212,7 +211,7 @@ public class Weather {
         }
 
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             processJsonResult(result);
             finishedProcessing();
         }

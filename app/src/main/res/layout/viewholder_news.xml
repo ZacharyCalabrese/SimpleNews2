@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/viewholder_news_card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:background="@android:color/white"
+    android:padding="1dp"
+    card_view:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/viewholder_news_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_size_subhead">
+        </TextView>
+
+        <TextView
+            android:id="@+id/viewholder_news_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewholder_news_title"
+            android:layout_alignLeft="@id/viewholder_news_title"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_half"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+            android:layout_marginLeft="@dimen/news_card_margin_between_links"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/text_size_body">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/viewholder_news_description"
+            >
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/viewholder_news_pocket_button"
+                android:visibility="gone"
+                android:id="@+id/viewholder_news_pocket_button" />
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/viewholder_news_share_button"
+                android:visibility="gone"
+                android:id="@+id/viewholder_news_share_button" />
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/viewholder_news_read_button"
+                android:visibility="gone"
+                android:id="@+id/viewholder_news_read_button" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+
+
+

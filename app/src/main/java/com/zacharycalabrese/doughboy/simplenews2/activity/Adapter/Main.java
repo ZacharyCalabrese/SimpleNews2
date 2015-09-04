@@ -16,8 +16,6 @@ import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.News;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.Weather;
 
-import org.w3c.dom.Text;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -28,16 +26,16 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int CARD_COUNT = 2;
     private Context context;
 
-    public Main(Context context){
+    public Main(Context context) {
         this.context = context;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater;
         View view;
 
-        switch (i){
+        switch (i) {
             case 0:
                 layoutInflater = LayoutInflater.from(viewGroup.getContext());
                 view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
@@ -53,8 +51,8 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i){
-        switch(i){
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        switch (i) {
             case 0:
                 updateWeatherViewHolder(viewHolder);
                 break;
@@ -67,22 +65,22 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
         return position % CARD_COUNT;
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return CARD_COUNT;
     }
 
-    private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder){
-        final String DEGREE  = "\u00b0";
+    private void updateWeatherViewHolder(RecyclerView.ViewHolder viewHolder) {
+        final String DEGREE = "\u00b0";
         Weather weather = new Weather(context);
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results
                 = weather.getWeekData();
 
-        WeatherViewHolder weatherViewHolder = (WeatherViewHolder)viewHolder;
+        WeatherViewHolder weatherViewHolder = (WeatherViewHolder) viewHolder;
 
         try {
             String dateFormatted = results.get(0).day + " " + results.get(0).month
@@ -120,18 +118,17 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     context.startActivity(intent);
                 }
             });
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
 
         }
     }
 
-    private void updateNewsViewHolder(RecyclerView.ViewHolder viewHolder){
+    private void updateNewsViewHolder(RecyclerView.ViewHolder viewHolder) {
         NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
         News news = new News(context);
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.News> newsHelper =
                 news.getLatestHeadlines();
 
-        Collections.reverse(newsHelper);
         try {
             setHeadline(newsViewHolder.headline1, newsHelper.get(0).title, newsHelper.get(0).link);
             setHeadline(newsViewHolder.headline2, newsHelper.get(1).title, newsHelper.get(1).link);
@@ -143,12 +140,20 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             setHeadline(newsViewHolder.headline8, newsHelper.get(7).title, newsHelper.get(7).link);
             setHeadline(newsViewHolder.headline9, newsHelper.get(8).title, newsHelper.get(8).link);
             setHeadline(newsViewHolder.headline10, newsHelper.get(9).title, newsHelper.get(9).link);
-        }catch (IndexOutOfBoundsException e){
+            newsViewHolder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,
+                            com.zacharycalabrese.doughboy.simplenews2.activity.Activity.News.class);
+                    context.startActivity(intent);
+                }
+            });
+        } catch (IndexOutOfBoundsException e) {
             Log.e("Error", "Index out of bounds");
         }
     }
 
-    private void setHeadline(TextView textView, String title, final String url){
+    private void setHeadline(TextView textView, String title, final String url) {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +165,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         textView.setText(title);
     }
 
-    public class WeatherViewHolder extends RecyclerView.ViewHolder{
+    public class WeatherViewHolder extends RecyclerView.ViewHolder {
         protected TextView currentDate;
         protected TextView currentLocation;
         protected ImageView currentCondition;
@@ -187,7 +192,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected ImageView day5Condition;
         protected FloatingActionButton floatingActionButton;
 
-        public WeatherViewHolder(View v){
+        public WeatherViewHolder(View v) {
             super(v);
             currentDate = (TextView) v.findViewById(R.id.viewholder_main_weather_date);
             currentLocation = (TextView) v.findViewById(R.id.viewholder_main_weather_location);
@@ -218,7 +223,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder{
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
         protected TextView headline1;
         protected TextView headline2;
         protected TextView headline3;
@@ -229,8 +234,9 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected TextView headline8;
         protected TextView headline9;
         protected TextView headline10;
+        protected FloatingActionButton floatingActionButton;
 
-        public NewsViewHolder(View v){
+        public NewsViewHolder(View v) {
             super(v);
             headline1 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_1);
             headline2 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_2);
@@ -242,6 +248,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             headline8 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_8);
             headline9 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_9);
             headline10 = (TextView) v.findViewById(R.id.viewholder_main_news_headline_10);
+            floatingActionButton = (FloatingActionButton) v.findViewById(R.id.viewholder_main_news_fab);
         }
     }
 }

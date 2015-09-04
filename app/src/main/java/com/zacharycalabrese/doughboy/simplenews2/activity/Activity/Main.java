@@ -1,10 +1,10 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -44,15 +44,16 @@ public class Main extends ActionBarActivity {
         mainAdapter = new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main(this);
         recyclerView.setAdapter(mainAdapter);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(){
-                updateWeatherAndNews();;
+            public void onRefresh() {
+                updateWeatherAndNews();
+                ;
             }
         });
     }
 
-    private void updateWeatherAndNews(){
+    private void updateWeatherAndNews() {
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -62,13 +63,13 @@ public class Main extends ActionBarActivity {
                 News news = new News(getApplicationContext());
                 news.fetchLatestNews();
 
-                while (!news.getUpdatedNews()){
+                while (!news.getUpdatedNews()) {
                     try {
                         sleep(1000);
-                    }catch (InterruptedException e){
+                    } catch (InterruptedException e) {
 
                     }
-                };
+                }
 
                 redrawScreen();
             }
@@ -76,18 +77,18 @@ public class Main extends ActionBarActivity {
         thread.start();
     }
 
-    private void ifFirstTimeRunning(){
+    private void ifFirstTimeRunning() {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(this);
         if (SP.getBoolean("first_time_running", true)) {
             initializeSourcesDatabase();
         }
     }
 
-    private void initializeSourcesDatabase(){
-        String [] sourcesNamesArray = this.getResources().getStringArray(R.array.base_sources_names);
-        String [] sourcesUrlArray = this.getResources().getStringArray(R.array.base_sources_rss_url);
+    private void initializeSourcesDatabase() {
+        String[] sourcesNamesArray = this.getResources().getStringArray(R.array.base_sources_names);
+        String[] sourcesUrlArray = this.getResources().getStringArray(R.array.base_sources_rss_url);
 
-        for(String source : sourcesNamesArray){
+        for (String source : sourcesNamesArray) {
 
             String[] parts;
             parts = source.split("\\:");
@@ -105,24 +106,25 @@ public class Main extends ActionBarActivity {
 
     }
 
-    private void updateNewsSources(){
+    private void updateNewsSources() {
         News news = new News(this);
         news.fetchLatestNews();
     }
 
-    private void updateWeather(){
+    private void updateWeather() {
         Thread thread = new Thread() {
             @Override
             public void run() {
                 Weather weather = new Weather();
                 weather.updateWeather();
-                while (!weather.getUpdatedWeather()){
+                while (!weather.getUpdatedWeather()) {
                     try {
                         sleep(1000);
-                    }catch (InterruptedException e){
+                    } catch (InterruptedException e) {
 
                     }
-                };
+                }
+                ;
 
                 redrawScreen();
             }
@@ -130,7 +132,7 @@ public class Main extends ActionBarActivity {
         thread.start();
     }
 
-    private void redrawScreen(){
+    private void redrawScreen() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

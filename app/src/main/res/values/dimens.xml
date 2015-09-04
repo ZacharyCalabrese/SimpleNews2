@@ -3,9 +3,12 @@
     <dimen name="activity_horizontal_margin_plus">24dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin_half">8dp</dimen>
+    <dimen name="activity_vertical_margin_half">8dp</dimen>
     <dimen name="text_size_display_2">45sp</dimen>
     <dimen name="text_size_display_1">34sp</dimen>
     <dimen name="text_size_headline">24sp</dimen>
     <dimen name="text_size_subhead">17sp</dimen>
     <dimen name="text_size_body">15sp</dimen>
+    <dimen name="news_card_margin_between_links">5dp</dimen>
 </resources>

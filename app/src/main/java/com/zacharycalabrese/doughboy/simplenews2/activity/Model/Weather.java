@@ -21,11 +21,11 @@ public class Weather extends SugarRecord<Weather> {
     public String humidity;
     public String direction;
 
-    public Weather(){
+    public Weather() {
 
     }
 
-    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weatherObject){
+    public Weather(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather weatherObject) {
         this.location = weatherObject.location;
         this.temperatureHi = weatherObject.temperatureHi;
         this.temperatureLow = weatherObject.temperatureLow;
