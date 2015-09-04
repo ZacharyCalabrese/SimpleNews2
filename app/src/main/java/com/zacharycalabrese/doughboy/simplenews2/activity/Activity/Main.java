@@ -1,5 +1,7 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,8 +10,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source;
@@ -51,14 +57,14 @@ public class Main extends ActionBarActivity {
                 ;
             }
         });
+        updateWeatherAndNews();
     }
 
     private void updateWeatherAndNews() {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                Weather weather = new Weather();
-                weather.updateWeather();
+                updateWeather();
 
                 News news = new News(getApplicationContext());
                 news.fetchLatestNews();
@@ -75,6 +81,58 @@ public class Main extends ActionBarActivity {
             }
         };
         thread.start();
+    }
+
+    private void updateWeather(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String zipCode = sharedPreferences.getString("zip_code", "");
+
+        try {
+            if (zipCode.length() != 5)
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showInputDialog();
+                    }
+                });
+
+        }catch (NullPointerException e){
+            Log.v("Nulpointer", "exception");
+        }
+
+        zipCode = sharedPreferences.getString("zip_code", "");
+        Weather weather = new Weather(zipCode);
+        weather.updateWeather();
+    }
+
+    protected void showInputDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(Main.this);
+        View promptView = layoutInflater.inflate(R.layout.dialog_input_zip, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.dialog_input_zip_edit_text);
+        // Setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor zipCodeEdit = sharedPreferences.edit();
+                        zipCodeEdit.putString("zip_code", editText.getText().toString());
+                        zipCodeEdit.commit();
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // Create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     private void ifFirstTimeRunning() {
@@ -104,32 +162,6 @@ public class Main extends ActionBarActivity {
             dataSource.addSource(source1);
         }
 
-    }
-
-    private void updateNewsSources() {
-        News news = new News(this);
-        news.fetchLatestNews();
-    }
-
-    private void updateWeather() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                Weather weather = new Weather();
-                weather.updateWeather();
-                while (!weather.getUpdatedWeather()) {
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-
-                    }
-                }
-                ;
-
-                redrawScreen();
-            }
-        };
-        thread.start();
     }
 
     private void redrawScreen() {

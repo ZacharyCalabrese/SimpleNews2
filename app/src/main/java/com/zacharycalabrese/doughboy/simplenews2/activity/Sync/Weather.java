@@ -24,13 +24,15 @@ import java.text.SimpleDateFormat;
 public class Weather {
     private final int DAYS_TO_FETCH = 5;
     private Boolean updatedWeather;
+    private String zipCode;
 
-    public Weather() {
+    public Weather(String zipCode) {
         updatedWeather = false;
+        this.zipCode = zipCode;
     }
 
     public void updateWeather() {
-        new FetchWeatherTask().execute("11232,USA");
+        new FetchWeatherTask().execute(zipCode + ",USA");
     }
 
     private void finishedProcessing() {

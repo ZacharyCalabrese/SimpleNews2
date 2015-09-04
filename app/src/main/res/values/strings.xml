@@ -28,7 +28,8 @@
     <string name="viewholder_news_read_button">READ</string>
     <string name="pocket_class_name">com.ideashower.readitlater.pro</string>
     <string name="pocket_save_activity_name">com.ideashower.readitlater.activity.AddActivity</string>
-
+    <string name="dialog_input_zip_message">Enter zip code</string>
+    <string name="dialog_input_zip_message_hint">Zip code</string>
     <string name="hello_world">Hello world!</string>
 
 

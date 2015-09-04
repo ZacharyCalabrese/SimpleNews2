@@ -63,19 +63,10 @@ public class News extends Fragment {
                 newsData.getStoriesByCategory(category);
 
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.fragment_news_swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.primary_color, R.color.accent_color);
         ListView listView = (ListView) rootView.findViewById(R.id.fragment_news_list_of_articles);
         listView.setAdapter(new com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.News(
                 getActivity(), stories));
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                updateCurrentFeed(category);
-                ;
-            }
-        });
 
         return rootView;
     }
