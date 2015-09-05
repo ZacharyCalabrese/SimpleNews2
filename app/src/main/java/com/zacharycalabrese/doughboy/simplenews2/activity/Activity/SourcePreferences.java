@@ -6,7 +6,10 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
+import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source;
 
 import java.util.List;
@@ -14,48 +17,34 @@ import java.util.List;
 /**
  * Created by zcalabrese on 9/4/15.
  */
-public class SourcePreferences extends PreferenceActivity {
+public class SourcePreferences extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(this);
 
-        Source sourceManager = new Source();
-        String[] categories = sourceManager.getCategoriesWithoutSubscribed();
-        for (String cat : categories){
-            PreferenceCategory category = new PreferenceCategory(this);
-            category.setTitle(cat);
-            screen.addPreference(category);
+        setContentView(R.layout.activity_sources_preferences);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
 
-            List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> results
-                    = sourceManager.getSourceByCategory(cat);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            for(com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source res : results){
-                CheckBoxPreference checkBoxPref = new CheckBoxPreference(this);
-                checkBoxPref.setKey(res.name);
-                checkBoxPref.setTitle(res.name);
-                checkBoxPref.setSummary(res.rssUrl);
-                checkBoxPref.setChecked(res.subscribed);
-                checkBoxPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Bundle args = new Bundle();
+        args.putBundle("context", savedInstanceState);
 
-                        List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source> source =
-                                com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.find(
-                                        com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.class,
-                                        "name = ?", preference.getKey());
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content_wrapper, new com.zacharycalabrese.doughboy.simplenews2.activity.Fragment.Sources())
+                .commit();
 
-                        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source item : source){
-                            item.subscribed = false;
-                            item.save();
-                        }
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
 
-                        return true;
-                    }
-                });
-                category.addPreference(checkBoxPref);
-            }
         }
-        setPreferenceScreen(screen);
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -47,7 +47,7 @@
         <activity
             android:name=".activity.Activity.SourcePreferences"
             android:theme="@style/AppTheme"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings_sources" >
             <intent-filter>
                 <action android:name=".activity.Activity.SourcePreferences" />
                 <category android:name="android.intent.category.DEFAULT" />

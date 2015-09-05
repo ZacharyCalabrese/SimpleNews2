@@ -69,5 +69,4 @@ public class Settings extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 
@@ -23,6 +24,7 @@ public class Weather extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.activity_weather_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -38,5 +40,15 @@ public class Weather extends ActionBarActivity {
                 this, weatherData.getWeekData());
         recyclerView.setAdapter(weatherAdapter);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
