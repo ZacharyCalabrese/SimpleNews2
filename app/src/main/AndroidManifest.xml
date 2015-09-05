@@ -41,12 +41,12 @@
         </activity>
         <activity
             android:name=".activity.Activity.Settings"
-            android:theme="@style/Theme.Settings"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
             android:name=".activity.Activity.SourcePreferences"
-            android:theme="@style/Theme.Settings"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_settings" >
             <intent-filter>
                 <action android:name=".activity.Activity.SourcePreferences" />

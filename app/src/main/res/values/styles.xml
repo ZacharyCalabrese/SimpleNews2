@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/dark_primary_color</item>
         <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+        <item name="colorAccent">@color/primary_color</item>
     </style>
 
     <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">

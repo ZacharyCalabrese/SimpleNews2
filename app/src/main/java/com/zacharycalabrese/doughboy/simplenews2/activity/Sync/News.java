@@ -34,16 +34,14 @@ public class News {
     public void fetchLatestNews() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Long lastUpdated = sp.getLong("last_updated_sources", 0);
-        Log.v("Current Time millis", Long.toString(System.currentTimeMillis()));
-        Log.v("Last updated ", Long.toString(lastUpdated));
         if( (System.currentTimeMillis() - 1200000) > lastUpdated) {
             Source source = new Source();
-            ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> results =
-                    source.getSubscriptions();
+            ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> results;
+            results = source.getSubscriptions();
 
             new FetchNewsTask().execute(results);
         }else{
-            finishedProcessing();
+            updatedNews = true;
         }
     }
 
@@ -65,7 +63,6 @@ public class News {
         com.zacharycalabrese.doughboy.simplenews2.activity.Data.News newsData =
                 new com.zacharycalabrese.doughboy.simplenews2.activity.Data.News(context);
         newsData.bulkLoadToDatabase(results);
-
     }
 
     public class FetchNewsTask extends AsyncTask<

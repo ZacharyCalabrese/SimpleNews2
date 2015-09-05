@@ -14,6 +14,21 @@ public class Source {
 
     }
 
+    public String[] getCategoriesWithoutSubscribed(){
+        String[] resultsToReturn;
+
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source> results =
+                com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.findWithQuery(
+                        com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.class,
+                        "Select distinct(category) from Source;");
+
+        resultsToReturn = new String[results.size()];
+        for(com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source item : results)
+            resultsToReturn[results.indexOf(item)] = item.category;
+
+        return resultsToReturn;
+    }
+
     public String[] getCategories(){
         String[] resultsToReturn;
 

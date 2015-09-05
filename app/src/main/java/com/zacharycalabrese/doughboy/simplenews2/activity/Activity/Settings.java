@@ -14,12 +14,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
@@ -37,34 +40,34 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class Settings extends PreferenceActivity {
+public class Settings extends ActionBarActivity {
     private Toolbar toolbar;
-    private AppCompatDelegate mDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_settings);
+
+        setContentView(R.layout.activity_settings);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content_wrapper, new com.zacharycalabrese.doughboy.simplenews2.activity.Fragment.Settings())
+                .commit();
 
         //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
     }
 
-    /**
-     * Override setContentView to inflate our custom settings page and custom
-     * action bar
-     *
-     * @param layoutResID
-     */
     @Override
-    public void setContentView(int layoutResID) {
-        ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(
-                R.layout.activity_settings, new LinearLayout(this), false);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
 
-
-        ViewGroup contentWrapper = (ViewGroup) contentView.findViewById(R.id.content_wrapper);
-        LayoutInflater.from(this).inflate(layoutResID, contentWrapper, true);
-
-        getWindow().setContentView(contentView);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

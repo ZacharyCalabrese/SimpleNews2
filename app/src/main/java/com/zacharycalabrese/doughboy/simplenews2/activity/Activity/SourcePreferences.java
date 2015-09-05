@@ -21,7 +21,7 @@ public class SourcePreferences extends PreferenceActivity {
         PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(this);
 
         Source sourceManager = new Source();
-        String[] categories = sourceManager.getCategories();
+        String[] categories = sourceManager.getCategoriesWithoutSubscribed();
         for (String cat : categories){
             PreferenceCategory category = new PreferenceCategory(this);
             category.setTitle(cat);
