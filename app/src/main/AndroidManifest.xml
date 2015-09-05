@@ -39,6 +39,20 @@
             android:name=".activity.Activity.News"
             android:label="@string/title_activity_news" >
         </activity>
+        <activity
+            android:name=".activity.Activity.Settings"
+            android:theme="@style/Theme.Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".activity.Activity.SourcePreferences"
+            android:theme="@style/Theme.Settings"
+            android:label="@string/title_activity_settings" >
+            <intent-filter>
+                <action android:name=".activity.Activity.SourcePreferences" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

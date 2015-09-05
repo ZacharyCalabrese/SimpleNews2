@@ -1,7 +1,9 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Sync;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source;
@@ -28,17 +30,21 @@ public class News {
         updatedNews = false;
     }
 
-    public void fetchSpecificFeed(String category){
-
-    }
 
     public void fetchLatestNews() {
-        Source source = new Source();
-        ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> results =
-                source.getSubscriptions();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        Long lastUpdated = sp.getLong("last_updated_sources", 0);
+        Log.v("Current Time millis", Long.toString(System.currentTimeMillis()));
+        Log.v("Last updated ", Long.toString(lastUpdated));
+        if( (System.currentTimeMillis() - 1200000) > lastUpdated) {
+            Source source = new Source();
+            ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> results =
+                    source.getSubscriptions();
 
-
-        new FetchNewsTask().execute(results);
+            new FetchNewsTask().execute(results);
+        }else{
+            finishedProcessing();
+        }
     }
 
     public boolean getUpdatedNews() {
@@ -46,6 +52,10 @@ public class News {
     }
 
     private void finishedProcessing() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putLong("last_updated_sources", System.currentTimeMillis());
+        editor.commit();
         updatedNews = true;
     }
 

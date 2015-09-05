@@ -2,6 +2,7 @@ package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -54,7 +55,6 @@ public class Main extends ActionBarActivity {
             @Override
             public void onRefresh() {
                 updateWeatherAndNews();
-                ;
             }
         });
         updateWeatherAndNews();
@@ -88,21 +88,23 @@ public class Main extends ActionBarActivity {
         String zipCode = sharedPreferences.getString("zip_code", "");
 
         try {
-            if (zipCode.length() != 5)
+            if (zipCode.length() != 5) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         showInputDialog();
+
                     }
                 });
-
+            }else {
+                zipCode = sharedPreferences.getString("zip_code", "");
+                Weather weather = new Weather(zipCode);
+                weather.updateWeather();
+            }
         }catch (NullPointerException e){
             Log.v("Nulpointer", "exception");
         }
 
-        zipCode = sharedPreferences.getString("zip_code", "");
-        Weather weather = new Weather(zipCode);
-        weather.updateWeather();
     }
 
     protected void showInputDialog() {
@@ -149,7 +151,7 @@ public class Main extends ActionBarActivity {
         for (String source : sourcesNamesArray) {
 
             String[] parts;
-            parts = source.split("\\:");
+            parts = source.split("\\: ");
 
             String category = parts[0];
             String name = parts[1];
@@ -190,6 +192,8 @@ public class Main extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, Settings.class);
+            startActivity(i);
             return true;
         }
 

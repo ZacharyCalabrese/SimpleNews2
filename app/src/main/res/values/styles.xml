@@ -10,5 +10,12 @@
         <item name="android:popupBackground">@color/primary_color</item>
     </style>
 
+    <style name="Theme.Settings" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="colorAccent">@color/primary_color</item>
+        <item name="toolbarStyle">@layout/toolbar</item>
+    </style>
+
 </resources>
 

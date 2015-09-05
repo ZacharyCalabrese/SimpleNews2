@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/primary_text"
+        android:title="@string/title_activity_news">
+
+        <Preference
+            android:title="Sources"
+            android:summary="Choose news sources" >
+
+            <intent
+                android:action=".activity.Activity.SourcePreferences" />
+
+        </Preference>
+
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/primary_text"
+        android:title="@string/activity_weather_name">
+
+        <EditTextPreference
+            android:key="zip_code"
+            android:summary="Zip code used for weather data"
+            android:maxLength="5"
+            android:title="Zip Code"
+            android:defaultValue=""
+            android:inputType="number"/>
+
+        <SwitchPreference
+            android:key="fahrenheit_or_celsius"
+            android:title="Temperature Unit"
+            android:summaryOn="Fahrenheit"
+            android:summaryOff="Celsius"
+            android:defaultValue="true"/>
+
+        <SwitchPreference
+            android:key="metric_or_imperial"
+            android:title="Wind Speed Unit"
+            android:summaryOn="mph"
+            android:summaryOff="kmh"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/primary_text"
+        android:title="About">
+
+        <Preference
+            android:title="Version"
+            android:summary="1.0"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>

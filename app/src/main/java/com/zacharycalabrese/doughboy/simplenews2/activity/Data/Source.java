@@ -29,6 +29,29 @@ public class Source {
         return resultsToReturn;
     }
 
+    public ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source>
+        getSourceByCategory(String category){
+
+
+        List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source> results =
+                com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.find(
+                        com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.class,
+                        "category = ?", category);
+
+        ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> returningList =
+                new ArrayList<>();
+
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source item : results) {
+            com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source newItem =
+                    new com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source(
+                            item.name, item.rssUrl, item.category, item.subscribed, item);
+
+            returningList.add(newItem);
+        }
+
+        return returningList;
+    }
+
     public ArrayList<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source> getSubscriptions() {
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source> results =
                 com.zacharycalabrese.doughboy.simplenews2.activity.Model.Source.find(

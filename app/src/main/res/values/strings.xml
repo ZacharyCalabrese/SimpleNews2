@@ -30,7 +30,7 @@
     <string name="pocket_save_activity_name">com.ideashower.readitlater.activity.AddActivity</string>
     <string name="dialog_input_zip_message">Enter zip code</string>
     <string name="dialog_input_zip_message_hint">Zip code</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings">Settings</string>
 
 
 </resources>

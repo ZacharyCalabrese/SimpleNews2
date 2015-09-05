@@ -23,6 +23,7 @@ public class Weather extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         recyclerView = (RecyclerView) findViewById(R.id.activity_weather_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
