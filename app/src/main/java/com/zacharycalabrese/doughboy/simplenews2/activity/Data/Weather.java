@@ -84,6 +84,7 @@ public class Weather {
         List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> helperWeatherList;
         helperWeatherList = initilizeHelperWeatherList(results);
         helperWeatherList = processTemperatures(helperWeatherList);
+        helperWeatherList = processConditionImages(helperWeatherList);
         helperWeatherList = processConditions(helperWeatherList);
         helperWeatherList = processWind(helperWeatherList);
 
@@ -137,11 +138,21 @@ public class Weather {
         }
     }
 
-    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processConditions
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processConditionImages
             (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results) {
 
         for (com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res : results) {
             res.conditionImageResourceId = getImageResource(res.conditions);
+        }
+
+        return results;
+    }
+
+    private List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> processConditions
+            (List<com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather> results) {
+
+        for (com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Weather res : results) {
+            res.conditions = res.conditions.substring(0, 1).toUpperCase() + res.conditions.substring(1);
         }
 
         return results;

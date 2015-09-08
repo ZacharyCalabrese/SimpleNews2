@@ -11,12 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         />
-    
+
     <FrameLayout
         android:id="@+id/content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <com.melnykov.fab.FloatingActionButton
             xmlns:fab="http://schemas.android.com/apk/res-auto"

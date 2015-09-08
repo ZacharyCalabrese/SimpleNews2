@@ -25,6 +25,8 @@ public class SourcePreferences extends ActionBarActivity {
         setContentView(R.layout.activity_sources_preferences);
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
 
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

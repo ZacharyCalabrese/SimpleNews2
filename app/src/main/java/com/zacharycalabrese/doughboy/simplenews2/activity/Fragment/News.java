@@ -54,7 +54,13 @@ public class News extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         tabPosition = getArguments().getInt(POSITION_KEY);
-        final String category = (tabTitlesHashTable.get(tabPosition));
+
+        String category = (tabTitlesHashTable.get(tabPosition));
+
+        if(category == null){
+            tabPosition = savedInstanceState.getInt(POSITION_KEY);
+            category = (tabTitlesHashTable.get(tabPosition));
+        }
 
         com.zacharycalabrese.doughboy.simplenews2.activity.Data.News newsData =
                 new com.zacharycalabrese.doughboy.simplenews2.activity.Data.News();
@@ -69,6 +75,13 @@ public class News extends Fragment {
 
 
         return rootView;
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(POSITION_KEY, tabPosition);
     }
 
     private void updateCurrentFeed(String currentCategory){
