@@ -139,15 +139,18 @@ public class News extends BaseAdapter{
      * @param position
      */
     private void setReadOnClickListener(final ViewHolder viewHolder, final int position){
+
         viewHolder.read_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                Intent intent = new Intent(context, WebBrowser.class);
-                intent.putExtra("URL", newsFeedDatabaseArrayList.get((int)getItemId(position)).LINK);
+                Intent intent = new Intent(context,
+                        com.zacharycalabrese.doughboy.simplenews2.activity.Activity.Web.class);
+
+                intent.putExtra(context.getResources().getString(R.string.url_to_load),
+                        articles.get((int) getItemId(position)).link);
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                */
             }
         });
     }

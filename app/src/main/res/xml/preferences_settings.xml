@@ -25,10 +25,18 @@
         android:background="@color/primary_text"
         android:title="@string/activity_weather_name">
 
+        <ListPreference
+            android:key="@string/shared_preference_country_code"
+            android:summary="@string/shared_preference_country_code"
+            android:title="Country"
+            android:entries="@array/countries"
+            android:entryValues="@array/countries_values"
+            android:defaultValue="0"/>
+
         <EditTextPreference
-            android:key="zip_code"
+            android:id="@+id/prefernce_settings_edit_text_preference"
+            android:key="@string/shared_preference_zip_code"
             android:summary="Zip code used for weather data"
-            android:maxLength="5"
             android:title="Zip Code"
             android:defaultValue=""
             android:inputType="number"/>

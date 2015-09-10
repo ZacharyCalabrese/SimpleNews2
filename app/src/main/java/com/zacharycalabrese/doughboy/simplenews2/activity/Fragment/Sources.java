@@ -54,6 +54,7 @@ public class Sources extends PreferenceFragment {
                         return true;
                     }
                 });
+
                 category.addPreference(checkBoxPref);
             }
         }

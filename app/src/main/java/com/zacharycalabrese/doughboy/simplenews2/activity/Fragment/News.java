@@ -15,6 +15,7 @@ import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Sync.Weather;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -42,6 +43,33 @@ public class News extends Fragment {
     public static void setTabTitlesHashTable(String[] tabTitles) {
         for (int tab = 0; tab < tabTitles.length; tab++)
             tabTitlesHashTable.put(tab, tabTitles[tab]);
+
+    }
+
+    public static void setTabTitlesHashTable(Context context){
+        com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source news =
+                new com.zacharycalabrese.doughboy.simplenews2.activity.Data.Source();
+
+        String[] tabTitles = news.getCategories();
+
+        String[] standardCategories =
+            context.getResources().getStringArray(R.array.categoryDefaultValues);
+
+        List<String> cleanTitleList = new ArrayList<>();
+        for(String title : tabTitles){
+            for(String standardCat : standardCategories){
+                if(title.equals(standardCat.substring(2)))
+                    cleanTitleList.add(standardCat);
+            }
+        }
+
+        Collections.sort(cleanTitleList);
+        for(String title : cleanTitleList) {
+            cleanTitleList.set(cleanTitleList.indexOf(title), title.substring(2));
+        }
+        tabTitles = cleanTitleList.toArray(new String[cleanTitleList.size()]);
+        setTabTitlesHashTable(tabTitles);
+
     }
 
     @Override
@@ -54,14 +82,16 @@ public class News extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         tabPosition = getArguments().getInt(POSITION_KEY);
-
+        Log.v("Category createview:", Integer.toString(tabPosition));
         String category = (tabTitlesHashTable.get(tabPosition));
 
-        if(category == null){
-            tabPosition = savedInstanceState.getInt(POSITION_KEY);
+        if(tabTitlesHashTable == null || category == null){
+            Log.v("Category stting tables:", "please work");
+            setTabTitlesHashTable(getActivity());
             category = (tabTitlesHashTable.get(tabPosition));
         }
 
+        Log.v("Category 2:", category);
         com.zacharycalabrese.doughboy.simplenews2.activity.Data.News newsData =
                 new com.zacharycalabrese.doughboy.simplenews2.activity.Data.News();
 
@@ -77,11 +107,19 @@ public class News extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.v("Category 1:", "PAUSE");
+        tabPosition = getArguments().getInt(POSITION_KEY);
+        Log.v("Category 1:", Integer.toString(tabPosition));
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(POSITION_KEY, tabPosition);
+        Log.v("Category sis:", Integer.toString(tabPosition));
     }
 
     private void updateCurrentFeed(String currentCategory){

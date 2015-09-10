@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/dialog_input_zip_message"
-        android:id="@+id/textView" />
+        android:id="@+id/dialog_input_zip_message"
+        android:textColor="@color/primary_text"/>
 
     <EditText
         android:id="@+id/dialog_input_zip_edit_text"
@@ -19,7 +20,22 @@
         android:layout_height="wrap_content"
         android:hint="@string/dialog_input_zip_message_hint"
         android:inputType="number"
-        android:maxLength="5"
         android:padding="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/dialog_input_country_message"
+        android:id="@+id/dialog_input_country_message"
+        android:textColor="@color/primary_text"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_input_country_spinner"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/countries"
+        android:entryValues="@array/countries_values"/>
 
 </LinearLayout>

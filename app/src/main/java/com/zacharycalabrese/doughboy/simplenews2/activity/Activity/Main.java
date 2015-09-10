@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.zacharycalabrese.doughboy.simplenews2.R;
 import com.zacharycalabrese.doughboy.simplenews2.activity.Helper.Source;
@@ -27,6 +28,7 @@ import java.util.Arrays;
 
 
 public class Main extends ActionBarActivity {
+    private static final String LOG_TAG = Main.class.getName();
     com.zacharycalabrese.doughboy.simplenews2.activity.Adapter.Main mainAdapter;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -73,7 +75,7 @@ public class Main extends ActionBarActivity {
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
-
+                        Log.e(LOG_TAG, "Error sleeping update weather and news");
                     }
                 }
 
@@ -84,11 +86,15 @@ public class Main extends ActionBarActivity {
     }
 
     private void updateWeather(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String zipCode = sharedPreferences.getString("zip_code", "");
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final String zipCode = sharedPreferences.getString(
+                getResources().getString(R.string.shared_preference_zip_code), "");
+
+        final String countryCode = sharedPreferences.getString(
+                getResources().getString(R.string.shared_preference_country_code), "USA");
 
         try {
-            if (zipCode.length() != 5) {
+            if (zipCode.length() < 3) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -97,12 +103,29 @@ public class Main extends ActionBarActivity {
                     }
                 });
             }else {
-                zipCode = sharedPreferences.getString("zip_code", "");
-                Weather weather = new Weather(zipCode);
-                weather.updateWeather();
+                Thread thread = new Thread(){
+                    @Override
+                    public void run(){
+                        Weather weather = new Weather(zipCode, countryCode);
+                        weather.updateWeather();
+
+                        while (!weather.getUpdatedWeather()) {
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+
+                            }
+                        }
+
+                        redrawScreen();
+                    }
+                };
+
+                thread.start();
+
             }
         }catch (NullPointerException e){
-            Log.v("Nulpointer", "exception");
+            Log.v(LOG_TAG, "Null pointer exception on update weather");
         }
 
     }
@@ -114,7 +137,8 @@ public class Main extends ActionBarActivity {
         alertDialogBuilder.setView(promptView);
 
         final EditText editText = (EditText) promptView.findViewById(R.id.dialog_input_zip_edit_text);
-        // Setup a dialog window
+        final Spinner spinner = (Spinner) promptView.findViewById(R.id.dialog_input_country_spinner);
+
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -122,7 +146,9 @@ public class Main extends ActionBarActivity {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor zipCodeEdit = sharedPreferences.edit();
                         zipCodeEdit.putString("zip_code", editText.getText().toString());
+                        zipCodeEdit.putString("country_code", spinner.getSelectedItem().toString());
                         zipCodeEdit.commit();
+                        updateWeather();
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -198,5 +224,12 @@ public class Main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateWeather();
+        mainAdapter.notifyDataSetChanged();
     }
 }

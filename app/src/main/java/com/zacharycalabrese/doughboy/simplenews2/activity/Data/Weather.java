@@ -217,12 +217,14 @@ public class Weather {
 
         if (SP.getBoolean("metric_or_imperial", true)) {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToKmConversion;
+            speedInIntMetersPerSecond = (double)Math.round(speedInIntMetersPerSecond * 100) / 100;
             String speedInKilometersPerHour = Double.toString(speedInIntMetersPerSecond);
             return speedInKilometersPerHour + " km/h";
         } else {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToMphConversion;
+            speedInIntMetersPerSecond = (double)Math.round(speedInIntMetersPerSecond * 100) / 100;
             String speedInMilersPerHour = Double.toString(speedInIntMetersPerSecond);
-            return speedInMilersPerHour + "mph";
+            return speedInMilersPerHour + " mph";
         }
     }
 

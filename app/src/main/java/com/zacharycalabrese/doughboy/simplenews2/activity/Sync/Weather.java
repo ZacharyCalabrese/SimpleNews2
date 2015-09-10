@@ -25,14 +25,16 @@ public class Weather {
     private final int DAYS_TO_FETCH = 5;
     private Boolean updatedWeather;
     private String zipCode;
+    private String countryCode;
 
-    public Weather(String zipCode) {
+    public Weather(String zipCode, String countryCode) {
         updatedWeather = false;
         this.zipCode = zipCode;
+        this.countryCode = countryCode;
     }
 
     public void updateWeather() {
-        new FetchWeatherTask().execute(zipCode + ",USA");
+        new FetchWeatherTask().execute(zipCode + "," + countryCode);
     }
 
     private void finishedProcessing() {

@@ -237,4 +237,22 @@
         <item>10 Arts</item>
     </string-array>
 
+    <string-array name="countries">
+        <item>Australia</item>
+        <item>Canada</item>
+        <item>Germany</item>
+        <item>Italy</item>
+        <item>United Kingdom</item>
+        <item>United States of America</item>
+    </string-array>
+
+    <string-array name="countries_values">
+        <item>AUS</item>
+        <item>CAN</item>
+        <item>DEU</item>
+        <item>ITA</item>
+        <item>GBR</item>
+        <item>USA</item>
+    </string-array>
+
 </resources>

@@ -157,8 +157,12 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(url));
+                Intent intent = new Intent(context,
+                        com.zacharycalabrese.doughboy.simplenews2.activity.Activity.Web.class);
+
+                intent.putExtra(context.getResources().getString(R.string.url_to_load), url);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
