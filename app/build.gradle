@@ -8,12 +8,13 @@ android {
         applicationId "com.zacharycalabrese.doughboy.simplenews2"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
+        versionCode 17
         versionName "1.0"
     }
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
