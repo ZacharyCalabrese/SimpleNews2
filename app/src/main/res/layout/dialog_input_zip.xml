@@ -34,8 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_input_country_spinner"
-        android:drawSelectorOnTop="true"
         android:entries="@array/countries"
-        android:entryValues="@array/countries_values"/>
+        android:entryValues="@array/countries_values" />
 
 </LinearLayout>

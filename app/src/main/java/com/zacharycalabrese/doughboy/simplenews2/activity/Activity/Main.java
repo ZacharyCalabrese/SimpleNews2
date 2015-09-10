@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -139,14 +140,30 @@ public class Main extends ActionBarActivity {
         final EditText editText = (EditText) promptView.findViewById(R.id.dialog_input_zip_edit_text);
         final Spinner spinner = (Spinner) promptView.findViewById(R.id.dialog_input_country_spinner);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor countryCodeEdit = sharedPreferences.edit();
+                countryCodeEdit.putString(getResources().getString(
+                                R.string.shared_preference_country_code),
+                        parent.getItemAtPosition(pos).toString());
+                countryCodeEdit.commit();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor zipCodeEdit = sharedPreferences.edit();
-                        zipCodeEdit.putString("zip_code", editText.getText().toString());
-                        zipCodeEdit.putString("country_code", spinner.getSelectedItem().toString());
+
+                        zipCodeEdit.putString(getResources().getString(
+                                        R.string.shared_preference_zip_code),
+                                editText.getText().toString());
+
                         zipCodeEdit.commit();
                         updateWeather();
                     }

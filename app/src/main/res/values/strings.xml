@@ -39,7 +39,8 @@
     <string name="shared_preference_country_code">country_code</string>
     <string name="url_to_load">url_to_load</string>
     <string name="title_activity_web">Web</string>
-
+    <string name="menu_web_share">Share</string>
+    <string name="menu_web_open_in_browser">Open in browser</string>
     <string name="hello_world">Hello world!</string>
 
 

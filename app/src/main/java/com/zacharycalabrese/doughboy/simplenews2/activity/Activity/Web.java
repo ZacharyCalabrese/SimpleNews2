@@ -1,6 +1,7 @@
 package com.zacharycalabrese.doughboy.simplenews2.activity.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,14 +15,14 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 public class Web extends ActionBarActivity{
-
+    private String urlToLoad;
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        String urlToLoad = intent.getStringExtra(getResources().getString(R.string.url_to_load));
+        urlToLoad = intent.getStringExtra(getResources().getString(R.string.url_to_load));
 
         setContentView(R.layout.activity_web);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -48,7 +49,18 @@ public class Web extends ActionBarActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_web_share) {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, webView.getTitle());
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, webView.getUrl());
+            sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.startActivity(sharingIntent);
+            return true;
+        }else if(id == R.id.menu_web_open_in_browser) {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(webView.getUrl()));
+            this.startActivity(intent);
             return true;
         }else if(id == android.R.id.home){
             finish();
@@ -56,6 +68,7 @@ public class Web extends ActionBarActivity{
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     public class MyWebViewClient extends WebViewClient {
