@@ -18,7 +18,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:background="@color/primary_color"
+        android:background="?colorPrimary"
         android:layout_height="?attr/actionBarSize"
         android:textColor="@android:color/white"
         app:pstsIndicatorColor="@android:color/white"/>
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/background_color"
+        android:background="?android:panelColorBackground"
         />
 
 </LinearLayout>

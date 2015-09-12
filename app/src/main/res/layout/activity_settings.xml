@@ -13,7 +13,7 @@
         />
 
     <FrameLayout
-        android:background="@android:color/white"
+        android:background="?android:panelColorForeground"
         android:id="@+id/content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="0dp"

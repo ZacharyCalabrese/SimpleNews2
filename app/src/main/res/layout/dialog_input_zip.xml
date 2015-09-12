@@ -12,14 +12,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/dialog_input_zip_message"
         android:id="@+id/dialog_input_zip_message"
-        android:textColor="@color/primary_text"/>
+        android:textColor="?android:textColorPrimary"/>
 
     <EditText
         android:id="@+id/dialog_input_zip_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/dialog_input_zip_message_hint"
-        android:inputType="number"
         android:padding="10dp" />
 
     <TextView
@@ -28,7 +27,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/dialog_input_country_message"
         android:id="@+id/dialog_input_country_message"
-        android:textColor="@color/primary_text"/>
+        android:textColor="?android:textColorPrimary"/>
 
     <Spinner
         android:layout_width="match_parent"

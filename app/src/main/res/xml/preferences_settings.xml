@@ -5,6 +5,21 @@
     <PreferenceCategory
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="@color/primary_text"
+        android:title="@string/title_theme">
+
+        <SwitchPreference
+            android:key="@string/pref_dark_theme"
+            android:title="Select a theme"
+            android:summaryOn="Dark"
+            android:summaryOff="Light"
+            android:defaultValue="false"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/primary_text"
         android:title="@string/title_activity_news">
 
         <Preference

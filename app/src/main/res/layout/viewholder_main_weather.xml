@@ -2,8 +2,6 @@
     android:layout_margin="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
     android:id="@+id/viewholder_main_weather_card_view"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -20,14 +18,15 @@
             android:id="@+id/viewholder_main_weather_card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_color"
+            android:background="?android:colorBackground"
             android:gravity="center"
             android:text="@string/viewholder_main_weather_card_title"
-            android:textColor="@color/text_icons"
+            android:textColor="?android:textColorTertiary"
             android:textSize="@dimen/text_size_display_1"/>
 
 
         <LinearLayout
+            android:background="?android:panelColorForeground"
             android:layout_below="@id/viewholder_main_weather_card_title"
             android:layout_alignParentTop="@id/viewholder_main_weather_card_title"
             android:id="@+id/viewholder_main_weather_linear_layout_1"
@@ -44,7 +43,7 @@
                 android:id="@+id/viewholder_main_weather_date"
                 android:text="@string/viewholder_main_weather_date"
                 android:textSize="@dimen/text_size_headline"
-                android:textColor="@color/primary_text"/>
+                android:textColor="?android:textColorPrimary"/>
 
             <TextView
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
@@ -54,7 +53,7 @@
                 android:id="@+id/viewholder_main_weather_location"
                 android:text="@string/viewholder_main_weather_location"
                 android:textSize="@dimen/text_size_subhead"
-                android:textColor="@color/secondary_text"/>
+                android:textColor="?android:textColorSecondary"/>
 
             <ImageView
                 android:layout_gravity="center"
@@ -72,7 +71,7 @@
                 android:id="@+id/viewholder_main_weather_current_temperature"
                 android:text="@string/viewholder_main_weather_current_temperature"
                 android:textSize="@dimen/text_size_headline"
-                android:textColor="@color/primary_text"
+                android:textColor="?android:textColorPrimary"
                 />
 
             <LinearLayout
@@ -101,7 +100,7 @@
                         android:id="@+id/viewholder_main_weather_day_1"
                         android:text="@string/viewholder_main_weather_day"
                         android:textSize="@dimen/text_size_body"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="?android:textColorPrimary" />
 
                     <ImageView
                         android:layout_gravity="center"
@@ -118,7 +117,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_1_high"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="?android:textColorPrimary"/>
 
                     <TextView
                         android:layout_gravity="center"
@@ -127,7 +126,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_1_low"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/secondary_text"/>
+                        android:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
 
@@ -144,7 +143,7 @@
                         android:id="@+id/viewholder_main_weather_day_2"
                         android:text="@string/viewholder_main_weather_day"
                         android:textSize="@dimen/text_size_body"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="?android:textColorPrimary" />
 
                     <ImageView
                         android:layout_gravity="center"
@@ -161,7 +160,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_2_high"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="?android:textColorPrimary"/>
 
                     <TextView
                         android:layout_gravity="center"
@@ -170,7 +169,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_2_low"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/secondary_text"/>
+                        android:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
 
@@ -187,7 +186,7 @@
                         android:id="@+id/viewholder_main_weather_day_3"
                         android:text="@string/viewholder_main_weather_day"
                         android:textSize="@dimen/text_size_body"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="?android:textColorPrimary" />
 
                     <ImageView
                         android:layout_gravity="center"
@@ -204,7 +203,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_3_high"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="?android:textColorPrimary"/>
 
                     <TextView
                         android:layout_gravity="center"
@@ -213,7 +212,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_3_low"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/secondary_text"/>
+                        android:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
 
@@ -230,7 +229,7 @@
                         android:id="@+id/viewholder_main_weather_day_4"
                         android:text="@string/viewholder_main_weather_day"
                         android:textSize="@dimen/text_size_body"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="?android:textColorPrimary" />
 
                     <ImageView
                         android:layout_gravity="center"
@@ -247,7 +246,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_4_high"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="?android:textColorPrimary"/>
 
                     <TextView
                         android:layout_gravity="center"
@@ -256,7 +255,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_4_low"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/secondary_text"/>
+                        android:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
 
@@ -273,7 +272,7 @@
                         android:id="@+id/viewholder_main_weather_day_5"
                         android:text="@string/viewholder_main_weather_day"
                         android:textSize="@dimen/text_size_body"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="?android:textColorPrimary" />
 
                     <ImageView
                         android:layout_gravity="center"
@@ -290,7 +289,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_5_high"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/primary_text"/>
+                        android:textColor="?android:textColorPrimary"/>
 
                     <TextView
                         android:layout_gravity="center"
@@ -299,7 +298,7 @@
                         android:id="@+id/viewholder_main_weather_temperature_day_5_low"
                         android:text="@string/viewholder_main_weather_temperature_day"
                         android:textSize="@dimen/text_size_subhead"
-                        android:textColor="@color/secondary_text"/>
+                        android:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
 
@@ -318,7 +317,8 @@
             android:layout_marginEnd="@dimen/activity_vertical_margin"
             xmlns:fab="http://schemas.android.com/apk/res-auto"
             android:id="@+id/viewholder_main_weather_fab"
-            fab:fab_colorNormal="@color/accent_color" />
+            fab:fab_colorNormal="?colorAccent"
+            fab:fab_colorPressed="?android:textColorSecondary" />
 
     </RelativeLayout>
 

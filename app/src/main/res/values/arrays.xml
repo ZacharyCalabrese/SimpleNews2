@@ -212,28 +212,28 @@
     </string-array>
 
     <string-array name="categoryValues">
-        <item>1 World</item>
-        <item>2 U.S.</item>
-        <item>3 Politics</item>
-        <item>4 Technology</item>
-        <item>5 Sports</item>
-        <item>6 Business</item>
-        <item>7 Science</item>
-        <item>8 Food</item>
-        <item>9 Health</item>
+        <item>01 World</item>
+        <item>02 U.S.</item>
+        <item>03 Politics</item>
+        <item>04 Technology</item>
+        <item>05 Sports</item>
+        <item>06 Business</item>
+        <item>07 Science</item>
+        <item>08 Food</item>
+        <item>09 Health</item>
         <item>10 Arts</item>
     </string-array>
 
     <string-array name="categoryDefaultValues">
-        <item>1 World</item>
-        <item>2 U.S.</item>
-        <item>3 Politics</item>
-        <item>4 Technology</item>
-        <item>5 Sports</item>
-        <item>6 Business</item>
-        <item>7 Science</item>
-        <item>8 Food</item>
-        <item>9 Health</item>
+        <item>01 World</item>
+        <item>02 U.S.</item>
+        <item>03 Politics</item>
+        <item>04 Technology</item>
+        <item>05 Sports</item>
+        <item>06 Business</item>
+        <item>07 Science</item>
+        <item>08 Food</item>
+        <item>09 Health</item>
         <item>10 Arts</item>
     </string-array>
 

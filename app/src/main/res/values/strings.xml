@@ -37,12 +37,19 @@
     <string name="dialog_input_country_message">Select your country</string>
     <string name="shared_preference_zip_code">zip_code</string>
     <string name="shared_preference_country_code">country_code</string>
+    <string name="shared_preference_first_time_running">first_time_running</string>
     <string name="url_to_load">url_to_load</string>
-    <string name="title_activity_web">Web</string>
+    <string name="title_activity_web">Browser</string>
     <string name="menu_web_share">Share</string>
     <string name="menu_web_open_in_browser">Open in browser</string>
-    <string name="hello_world">Hello world!</string>
-
-
-
+    <string name="dialog_input_add_source_message">Source name</string>
+    <string name="dialog_input_add_source_message_hint">Enter a unique name</string>
+    <string name="dialog_input_add_source_rss">RSS Url</string>
+    <string name="dialog_input_add_source_rss_hint">Enter a valid RSS url</string>
+    <string name="dialog_input_edit_source_name">Source name</string>
+    <string name="dialog_input_edit_source_name_hint">Enter a unique name</string>
+    <string name="dialog_input_edit_source_rss">RSS Url</string>
+    <string name="dialog_input_edit_source_rss_hint">Enter a valid RSS url</string>
+    <string name="pref_dark_theme">pref_dark_theme</string>
+    <string name="title_theme">Theme</string>
 </resources>
