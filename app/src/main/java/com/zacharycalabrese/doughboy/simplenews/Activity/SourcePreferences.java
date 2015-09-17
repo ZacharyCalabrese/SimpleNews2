@@ -49,6 +49,7 @@ public class SourcePreferences extends ActionBarActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.activity_source_preferences_recycler_view);
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setVisibility(View.GONE);
         floatingActionButton.attachToRecyclerView(recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

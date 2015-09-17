@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
  * Created by zcalabrese on 8/25/15.
  */
 public class Weather {
+    private static final String LOG_TAG = Weather.class.getName();
     private final int DAYS_TO_FETCH = 5;
     private Boolean updatedWeather;
     private String zipCode;
@@ -216,7 +217,11 @@ public class Weather {
 
         @Override
         protected void onPostExecute(String result) {
-            processJsonResult(result);
+            try {
+                processJsonResult(result);
+            }catch (NullPointerException e){
+                Log.e(LOG_TAG, "No results; Possibly network exception");
+            }
             finishedProcessing();
         }
     }

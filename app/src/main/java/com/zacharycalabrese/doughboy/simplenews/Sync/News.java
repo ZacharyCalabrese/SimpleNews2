@@ -54,7 +54,6 @@ public class News {
         SharedPreferences.Editor editor = sp.edit();
         editor.putLong("last_updated_sources", System.currentTimeMillis());
         editor.commit();
-        updatedNews = true;
     }
 
     private void processResults(List<com.zacharycalabrese.doughboy.simplenews.Helper.News>
@@ -63,6 +62,12 @@ public class News {
         com.zacharycalabrese.doughboy.simplenews.Data.News newsData =
                 new com.zacharycalabrese.doughboy.simplenews.Data.News(context);
         newsData.bulkLoadToDatabase(results);
+
+        if(results.size() > 0) {
+            finishedProcessing();
+        }
+
+        updatedNews = true;
     }
 
 
@@ -109,8 +114,14 @@ public class News {
         @Override
         protected void onPostExecute(List<com.zacharycalabrese.doughboy.simplenews.Helper.News>
                                              newses) {
-            processResults(newses);
-            finishedProcessing();
+
+            try {
+                processResults(newses);
+            }catch (NullPointerException e){
+                updatedNews = true;
+                Log.e(LOG_TAG, "No results; Possibly network exception");
+            }
+
         }
     }
 }

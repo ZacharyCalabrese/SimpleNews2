@@ -20,11 +20,26 @@ public class News {
     private Context context;
 
     public News(){
-
+        removeOldRecords();
     }
 
     public News(Context context) {
         this.context = context;
+        removeOldRecords();
+    }
+
+    private void removeOldRecords(){
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                com.zacharycalabrese.doughboy.simplenews.Model.News.executeQuery("" +
+                "DELETE FROM NEWS WHERE ROWID IN (" +
+                "SELECT ROWID FROM NEWS ORDER BY ROWID DESC LIMIT -1 OFFSET 6000);");
+
+            }
+        };
+
+        thread.start();
     }
 
     public List<com.zacharycalabrese.doughboy.simplenews.Helper.News>
