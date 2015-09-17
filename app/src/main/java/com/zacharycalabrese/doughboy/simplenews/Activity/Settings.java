@@ -2,7 +2,6 @@ package com.zacharycalabrese.doughboy.simplenews.Activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;

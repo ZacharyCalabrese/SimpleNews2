@@ -12,14 +12,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-/**
- * Created by zcalabrese on 9/2/15.
- */
 public class News {
     private Context context;
 
-    public News(){
+    public News() {
         removeOldRecords();
     }
 
@@ -28,13 +24,13 @@ public class News {
         removeOldRecords();
     }
 
-    private void removeOldRecords(){
-        Thread thread = new Thread(){
+    private void removeOldRecords() {
+        Thread thread = new Thread() {
             @Override
             public void run() {
                 com.zacharycalabrese.doughboy.simplenews.Model.News.executeQuery("" +
-                "DELETE FROM NEWS WHERE ROWID IN (" +
-                "SELECT ROWID FROM NEWS ORDER BY ROWID DESC LIMIT -1 OFFSET 6000);");
+                        "DELETE FROM NEWS WHERE ROWID IN (" +
+                        "SELECT ROWID FROM NEWS ORDER BY ROWID DESC LIMIT -1 OFFSET 6000);");
 
             }
         };
@@ -43,7 +39,7 @@ public class News {
     }
 
     public List<com.zacharycalabrese.doughboy.simplenews.Helper.News>
-        getStoriesByCategory(String category){
+    getStoriesByCategory(String category) {
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.News> results =
                 com.zacharycalabrese.doughboy.simplenews.Model.News.findWithQuery(
@@ -109,7 +105,7 @@ public class News {
     public void bulkLoadToDatabase(
             List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHelperList) {
 
-        if(newsHelperList.size() > 0) {
+        if (newsHelperList.size() > 0) {
             List<com.zacharycalabrese.doughboy.simplenews.Model.News> newsModelList =
                     new ArrayList<>();
 
@@ -122,7 +118,7 @@ public class News {
                 java.util.Date TIMESTAMP;
                 Long time;
 
-                java.util.Date utilDate = null;
+                java.util.Date utilDate;
                 try {
                     DateFormat formatter = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy");
                     utilDate = formatter.parse(date);

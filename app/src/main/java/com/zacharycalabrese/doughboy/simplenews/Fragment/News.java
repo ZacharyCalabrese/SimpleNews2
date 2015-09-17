@@ -22,12 +22,12 @@ import java.util.List;
  */
 public class News extends Fragment {
     private static final Hashtable<Integer, String> tabTitlesHashTable = new Hashtable<Integer, String>();
-    private static Context context;
     private static final String POSITION_KEY = "position";
-    private int tabPosition;
+    private static Context context;
     SwipeRefreshLayout swipeRefreshLayout;
+    private int tabPosition;
 
-    public static News newFragment(int tabPosition, Context context, String[] tabTitles){
+    public static News newFragment(int tabPosition, Context context, String[] tabTitles) {
         setTabTitlesHashTable(tabTitles);
         News.context = context;
 
@@ -44,25 +44,25 @@ public class News extends Fragment {
 
     }
 
-    public static void setTabTitlesHashTable(Context context){
+    public static void setTabTitlesHashTable(Context context) {
         com.zacharycalabrese.doughboy.simplenews.Data.Source news =
                 new com.zacharycalabrese.doughboy.simplenews.Data.Source();
 
         String[] tabTitles = news.getCategories();
 
         String[] standardCategories =
-            context.getResources().getStringArray(R.array.categoryDefaultValues);
+                context.getResources().getStringArray(R.array.categoryDefaultValues);
 
         List<String> cleanTitleList = new ArrayList<>();
-        for(String title : tabTitles){
-            for(String standardCat : standardCategories){
-                if(title.equals(standardCat.substring(3)))
+        for (String title : tabTitles) {
+            for (String standardCat : standardCategories) {
+                if (title.equals(standardCat.substring(3)))
                     cleanTitleList.add(standardCat);
             }
         }
 
         Collections.sort(cleanTitleList);
-        for(String title : cleanTitleList) {
+        for (String title : cleanTitleList) {
             cleanTitleList.set(cleanTitleList.indexOf(title), title.substring(3));
         }
         tabTitles = cleanTitleList.toArray(new String[cleanTitleList.size()]);
@@ -83,7 +83,7 @@ public class News extends Fragment {
         Log.v("Category createview:", Integer.toString(tabPosition));
         String category = (tabTitlesHashTable.get(tabPosition));
 
-        if(tabTitlesHashTable == null || category == null){
+        if (tabTitlesHashTable == null || category == null) {
             Log.v("Category stting tables:", "please work");
             setTabTitlesHashTable(getActivity());
             category = (tabTitlesHashTable.get(tabPosition));
@@ -106,7 +106,7 @@ public class News extends Fragment {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         Log.v("Category 1:", "PAUSE");
         tabPosition = getArguments().getInt(POSITION_KEY);
@@ -120,7 +120,7 @@ public class News extends Fragment {
         Log.v("Category sis:", Integer.toString(tabPosition));
     }
 
-    private void updateCurrentFeed(String currentCategory){
+    private void updateCurrentFeed(String currentCategory) {
         Thread thread = new Thread() {
             @Override
             public void run() {

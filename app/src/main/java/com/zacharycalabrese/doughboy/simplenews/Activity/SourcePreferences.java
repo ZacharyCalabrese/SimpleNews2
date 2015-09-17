@@ -2,7 +2,6 @@ package com.zacharycalabrese.doughboy.simplenews.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -12,16 +11,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-
 
 import com.melnykov.fab.FloatingActionButton;
-import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
 import com.zacharycalabrese.doughboy.simplenews.R;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Created by zcalabrese on 9/4/15.
@@ -30,8 +22,7 @@ public class SourcePreferences extends ActionBarActivity {
     RecyclerView recyclerView;
     com.zacharycalabrese.doughboy.simplenews.Adapter.SourcePreferences sourceAdapter;
 
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
                 getResources().getString(R.string.pref_dark_theme), false)) {
             this.setTheme(R.style.AppThemeDark);
@@ -91,7 +82,7 @@ public class SourcePreferences extends ActionBarActivity {
         super.onResume();
     }
 
-    private void addNewSource(){
+    private void addNewSource() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

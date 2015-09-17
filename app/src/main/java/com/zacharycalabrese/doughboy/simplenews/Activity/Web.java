@@ -2,19 +2,19 @@ package com.zacharycalabrese.doughboy.simplenews.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebViewClient;
-
-import com.zacharycalabrese.doughboy.simplenews.R;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class Web extends ActionBarActivity{
+import com.zacharycalabrese.doughboy.simplenews.R;
+
+public class Web extends ActionBarActivity {
     private String urlToLoad;
     private WebView webView;
 
@@ -70,12 +70,12 @@ public class Web extends ActionBarActivity{
             sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.startActivity(sharingIntent);
             return true;
-        }else if(id == R.id.menu_web_open_in_browser) {
+        } else if (id == R.id.menu_web_open_in_browser) {
             Intent intent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(webView.getUrl()));
             this.startActivity(intent);
             return true;
-        }else if(id == android.R.id.home){
+        } else if (id == android.R.id.home) {
             finish();
             return true;
         }
@@ -100,8 +100,7 @@ public class Web extends ActionBarActivity{
 
         @Override
         public void onReceivedError(WebView view, int errorCode, String description,
-                                    String failingUrl)
-        {
+                                    String failingUrl) {
             Toast.makeText(getApplicationContext(), "Couldn't load page",
                     Toast.LENGTH_SHORT).show();
         }

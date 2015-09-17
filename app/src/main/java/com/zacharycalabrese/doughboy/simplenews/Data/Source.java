@@ -3,16 +3,13 @@ package com.zacharycalabrese.doughboy.simplenews.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by zcalabrese on 9/1/15.
- */
 public class Source {
 
     public Source() {
 
     }
 
-    public String[] getCategoriesWithoutSubscribed(){
+    public String[] getCategoriesWithoutSubscribed() {
         String[] resultsToReturn;
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> results =
@@ -21,13 +18,13 @@ public class Source {
                         "Select distinct(category) from Source;");
 
         resultsToReturn = new String[results.size()];
-        for(com.zacharycalabrese.doughboy.simplenews.Model.Source item : results)
+        for (com.zacharycalabrese.doughboy.simplenews.Model.Source item : results)
             resultsToReturn[results.indexOf(item)] = item.category;
 
         return resultsToReturn;
     }
 
-    public String[] getCategories(){
+    public String[] getCategories() {
         String[] resultsToReturn;
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> results =
@@ -36,14 +33,14 @@ public class Source {
                         "Select distinct(category) from Source where subscribed = 1;");
 
         resultsToReturn = new String[results.size()];
-        for(com.zacharycalabrese.doughboy.simplenews.Model.Source item : results)
+        for (com.zacharycalabrese.doughboy.simplenews.Model.Source item : results)
             resultsToReturn[results.indexOf(item)] = item.category;
 
         return resultsToReturn;
     }
 
     public ArrayList<com.zacharycalabrese.doughboy.simplenews.Helper.Source>
-        getSourceByCategory(String category){
+    getSourceByCategory(String category) {
 
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> results =
@@ -107,51 +104,48 @@ public class Source {
 
     public com.zacharycalabrese.doughboy.simplenews.Helper.Source
     editSource(com.zacharycalabrese.doughboy.simplenews.Helper.Source source,
-               String newName, String newUrl){
+               String newName, String newUrl) {
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> results =
                 com.zacharycalabrese.doughboy.simplenews.Model.Source.find(
                         com.zacharycalabrese.doughboy.simplenews.Model.Source.class,
                         "name = ?", source.name);
 
-        if(results.size() < 1)
+        if (results.size() < 1)
             return source;
 
-        if(!doesSourceWithNameExist(newName) && newName.length() > 4) {
+        if (!doesSourceWithNameExist(newName) && newName.length() > 4) {
             results.get(0).name = newName;
         }
 
-        if(!doesSourceWithUrlExist(newUrl) && newUrl.length() > 9){
+        if (!doesSourceWithUrlExist(newUrl) && newUrl.length() > 9) {
             results.get(0).rssUrl = newUrl;
         }
 
         results.get(0).save();
 
-        com.zacharycalabrese.doughboy.simplenews.Helper.Source returningItem =
-                new com.zacharycalabrese.doughboy.simplenews.Helper.Source(results.get(0));
-
-        return returningItem;
+        return new com.zacharycalabrese.doughboy.simplenews.Helper.Source(results.get(0));
     }
 
-    public void unsubscribe(String name){
+    public void unsubscribe(String name) {
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> source =
                 com.zacharycalabrese.doughboy.simplenews.Model.Source.find(
                         com.zacharycalabrese.doughboy.simplenews.Model.Source.class,
                         "name = ?", name);
 
-        if(source.size() == 1) {
+        if (source.size() == 1) {
             source.get(0).subscribed = false;
             source.get(0).save();
         }
     }
 
-    public void subscribe(String name){
+    public void subscribe(String name) {
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> source =
                 com.zacharycalabrese.doughboy.simplenews.Model.Source.find(
                         com.zacharycalabrese.doughboy.simplenews.Model.Source.class,
                         "name = ?", name);
 
-        if(source.size() == 1) {
+        if (source.size() == 1) {
             source.get(0).subscribed = true;
             source.get(0).save();
         }
@@ -179,10 +173,7 @@ public class Source {
                         com.zacharycalabrese.doughboy.simplenews.Model.Source.class, "name = ?",
                         name);
 
-        if (results.size() > 0)
-            return true;
-        else
-            return false;
+        return results.size() > 0;
     }
 
     private Boolean doesSourceWithUrlExist(String url) {
@@ -191,9 +182,6 @@ public class Source {
                         com.zacharycalabrese.doughboy.simplenews.Model.Source.class, "RSS_URL = ?",
                         url);
 
-        if (results.size() > 0)
-            return true;
-        else
-            return false;
+        return results.size() > 0;
     }
 }

@@ -219,7 +219,7 @@ public class Weather {
         protected void onPostExecute(String result) {
             try {
                 processJsonResult(result);
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 Log.e(LOG_TAG, "No results; Possibly network exception");
             }
             finishedProcessing();

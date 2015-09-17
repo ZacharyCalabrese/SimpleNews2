@@ -10,12 +10,8 @@ import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.widget.Toast;
 
-import com.zacharycalabrese.doughboy.simplenews.Helper.Utils;
 import com.zacharycalabrese.doughboy.simplenews.R;
 
-/**
- * Created by zcalabrese on 9/5/15.
- */
 public class Settings extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
@@ -27,8 +23,7 @@ public class Settings extends PreferenceFragment implements SharedPreferences.On
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-    {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         onResume();
     }
 

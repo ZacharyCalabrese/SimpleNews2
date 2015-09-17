@@ -16,13 +16,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.melnykov.fab.FloatingActionButton;
-import com.zacharycalabrese.doughboy.simplenews.R;
 import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
+import com.zacharycalabrese.doughboy.simplenews.R;
 import com.zacharycalabrese.doughboy.simplenews.Sync.News;
 import com.zacharycalabrese.doughboy.simplenews.Sync.Weather;
 
@@ -33,13 +32,12 @@ import java.util.List;
 
 public class Main extends ActionBarActivity {
     private static final String LOG_TAG = Main.class.getName();
-    private boolean weatherInputDialogShowing;
     com.zacharycalabrese.doughboy.simplenews.Adapter.Main mainAdapter;
-    private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines;
     com.zacharycalabrese.doughboy.simplenews.Data.News news;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
-
+    private boolean weatherInputDialogShowing;
+    private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +73,8 @@ public class Main extends ActionBarActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        news = new com.zacharycalabrese.doughboy.simplenews.Data.News(this);
-        newsHeadlines = news.getLatestHeadlines();
-        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this, newsHeadlines);
+
+        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this);
         recyclerView.setAdapter(mainAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -112,7 +109,7 @@ public class Main extends ActionBarActivity {
         thread.start();
     }
 
-    private void updateWeather(){
+    private void updateWeather() {
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String zipCode = sharedPreferences.getString(
                 getResources().getString(R.string.shared_preference_zip_code), "");
@@ -129,10 +126,10 @@ public class Main extends ActionBarActivity {
 
                     }
                 });
-            }else {
-                Thread thread = new Thread(){
+            } else {
+                Thread thread = new Thread() {
                     @Override
-                    public void run(){
+                    public void run() {
                         Weather weather = new Weather(zipCode, countryCode);
                         weather.updateWeather();
 
@@ -151,7 +148,7 @@ public class Main extends ActionBarActivity {
                 thread.start();
 
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Log.v(LOG_TAG, "Null pointer exception on update weather");
         }
 
@@ -161,12 +158,12 @@ public class Main extends ActionBarActivity {
         final Hashtable<String, String> countryCodeHashtable = new Hashtable<String, String>();
         String[] countryArray = getResources().getStringArray(R.array.countries);
         String[] countryCodeArray = getResources().getStringArray(R.array.countries_values);
-        for(int i = 0; i < countryArray.length; i++){
+        for (int i = 0; i < countryArray.length; i++) {
             countryCodeHashtable.put(countryArray[i], countryCodeArray[i]);
         }
 
 
-        if(!weatherInputDialogShowing){
+        if (!weatherInputDialogShowing) {
             weatherInputDialogShowing = true;
             LayoutInflater layoutInflater = LayoutInflater.from(Main.this);
             View promptView = layoutInflater.inflate(R.layout.dialog_input_zip, null);
@@ -252,7 +249,6 @@ public class Main extends ActionBarActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                newsHeadlines = news.getLatestHeadlines();
                 mainAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -284,7 +280,7 @@ public class Main extends ActionBarActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
                 getResources().getString(R.string.pref_dark_theme), false)) {
             getApplicationContext().setTheme(R.style.AppThemeDark);
@@ -292,7 +288,7 @@ public class Main extends ActionBarActivity {
 
         super.onResume();
         updateWeather();
-        newsHeadlines = news.getLatestHeadlines();
+
         mainAdapter.notifyDataSetChanged();
     }
 }

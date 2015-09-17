@@ -1,8 +1,5 @@
 package com.zacharycalabrese.doughboy.simplenews.Helper;
 
-/**
- * Created by zcalabrese on 9/1/15.
- */
 public class Source {
     public String name;
     public String rssUrl;
@@ -28,7 +25,7 @@ public class Source {
         this.source = source;
     }
 
-    public Source(com.zacharycalabrese.doughboy.simplenews.Model.Source item){
+    public Source(com.zacharycalabrese.doughboy.simplenews.Model.Source item) {
         this.name = item.name;
         this.rssUrl = item.rssUrl;
         this.category = item.category;

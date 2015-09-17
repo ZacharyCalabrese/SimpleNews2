@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Created by zcalabrese on 8/25/15.
- */
 public class Weather {
     private String[] arrayOfJsonResults;
     private String[][] splitArrayOfJsonResults;
@@ -217,12 +214,12 @@ public class Weather {
 
         if (!SP.getBoolean("metric_or_imperial", true)) {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToKmConversion;
-            speedInIntMetersPerSecond = (double)Math.round(speedInIntMetersPerSecond * 100) / 100;
+            speedInIntMetersPerSecond = (double) Math.round(speedInIntMetersPerSecond * 100) / 100;
             String speedInKilometersPerHour = Double.toString(speedInIntMetersPerSecond);
             return speedInKilometersPerHour + " km/h";
         } else {
             speedInIntMetersPerSecond = speedInIntMetersPerSecond * metersToMphConversion;
-            speedInIntMetersPerSecond = (double)Math.round(speedInIntMetersPerSecond * 100) / 100;
+            speedInIntMetersPerSecond = (double) Math.round(speedInIntMetersPerSecond * 100) / 100;
             String speedInMilersPerHour = Double.toString(speedInIntMetersPerSecond);
             return speedInMilersPerHour + " mph";
         }

@@ -1,19 +1,18 @@
 package com.zacharycalabrese.doughboy.simplenews.Activity;
 
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.zacharycalabrese.doughboy.simplenews.R;
 
 import java.util.ArrayList;
@@ -21,10 +20,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class News extends ActionBarActivity {
-    private String[] tabTitles;
     ViewPager pager;
     Toolbar toolbar;
     PagerSlidingTabStrip tabs;
+    private String[] tabTitles;
     private MyPagerAdapter adapter;
     private SystemBarTintManager mTintManager;
 
@@ -79,7 +78,7 @@ public class News extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setTabTitles(){
+    private void setTabTitles() {
         com.zacharycalabrese.doughboy.simplenews.Data.Source news =
                 new com.zacharycalabrese.doughboy.simplenews.Data.Source();
 
@@ -89,15 +88,15 @@ public class News extends ActionBarActivity {
                 this.getResources().getStringArray(R.array.categoryDefaultValues);
 
         List<String> cleanTitleList = new ArrayList<>();
-        for(String title : tabTitles){
-            for(String standardCat : standardCategories){
-                if(title.equals(standardCat.substring(3)))
+        for (String title : tabTitles) {
+            for (String standardCat : standardCategories) {
+                if (title.equals(standardCat.substring(3)))
                     cleanTitleList.add(standardCat);
             }
         }
 
         Collections.sort(cleanTitleList);
-        for(String title : cleanTitleList) {
+        for (String title : cleanTitleList) {
             cleanTitleList.set(cleanTitleList.indexOf(title), title.substring(3));
         }
 

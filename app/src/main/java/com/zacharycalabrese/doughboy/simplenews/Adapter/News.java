@@ -16,16 +16,13 @@ import com.zacharycalabrese.doughboy.simplenews.R;
 
 import java.util.List;
 
-/**
- * Created by zcalabrese on 9/3/15.
- */
-public class News extends BaseAdapter{
+public class News extends BaseAdapter {
     private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> articles;
     private LayoutInflater layoutInflater;
     private Context context;
 
     public News(Context context, List<
-                com.zacharycalabrese.doughboy.simplenews.Helper.News> articles) {
+            com.zacharycalabrese.doughboy.simplenews.Helper.News> articles) {
 
         this.context = context;
         this.articles = articles;
@@ -64,7 +61,7 @@ public class News extends BaseAdapter{
         return view;
     }
 
-    public void setCardOnCLickListener(final ViewHolder viewholder){
+    public void setCardOnCLickListener(final ViewHolder viewholder) {
         viewholder.cardLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,36 +78,21 @@ public class News extends BaseAdapter{
         });
     }
 
-    /**
-     * Set the share button onClickListener so that the link and title can be shared
-     * to supported applications such as email, messaging apps, etc...
-     * @param viewHolder
-     * @param position
-     */
-    private void setShareOnClickListener(final ViewHolder viewHolder, final int position){
+    private void setShareOnClickListener(final ViewHolder viewHolder, final int position) {
         viewHolder.share_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, articles.get((int) getItemId(position)).title);
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, articles.get((int)getItemId(position)).link);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, articles.get((int) getItemId(position)).link);
                 sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(sharingIntent);
             }
         });
     }
 
-    /**
-     * Set the pocket button onClickListener so that the link can be shared to the
-     * pocket application for reading later
-     *
-     * Throw an exception if the user does not have pocket installed on their device
-     *
-     * @param viewHolder
-     * @param position
-     */
-    private void setPocketOnClickListener(final ViewHolder viewHolder, final int position){
+    private void setPocketOnClickListener(final ViewHolder viewHolder, final int position) {
         viewHolder.pocket_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,15 +111,7 @@ public class News extends BaseAdapter{
         });
     }
 
-    /**
-     * Set the read button onClickListener so that the link can be opened in our
-     * custom webBrowser so that the user does not have to leave our application
-     * to read the article
-     *
-     * @param viewHolder
-     * @param position
-     */
-    private void setReadOnClickListener(final ViewHolder viewHolder, final int position){
+    private void setReadOnClickListener(final ViewHolder viewHolder, final int position) {
 
         viewHolder.read_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +131,7 @@ public class News extends BaseAdapter{
     private void setTextViewTitle(ViewHolder viewHolder, String title, String description) {
         String titleToDisplay = Html.fromHtml(title).toString();
 
-        if(!isAlphaNumeric(titleToDisplay)) {
+        if (!isAlphaNumeric(titleToDisplay)) {
             viewHolder.txtTitle.setText(titleToDisplay);
 
             String descriptionToDisplay = Html.fromHtml(description).toString().replace('\n', (char) 32)
@@ -170,28 +144,21 @@ public class News extends BaseAdapter{
         }
     }
 
-    public boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        if(s.matches(pattern)){
-            return true;
-        }
-        return false;
+    public boolean isAlphaNumeric(String s) {
+        String pattern = "^[a-zA-Z0-9]*$";
+
+        return s.matches(pattern);
     }
 
-    public boolean stringDifferentThanTitle(String string1, String string2){
+    public boolean stringDifferentThanTitle(String string1, String string2) {
         string1 = string1.toLowerCase();
         string2 = string2.toLowerCase();
-        if(string1.equals(string2))
-            return false;
 
-        return true;
+        return !string1.equals(string2);
     }
 
-    public boolean stringIsClear(String string){
-        if(string.contains("??"))
-            return false;
-
-        return true;
+    public boolean stringIsClear(String string) {
+        return !string.contains("??");
     }
 
     private static class ViewHolder {
@@ -202,7 +169,7 @@ public class News extends BaseAdapter{
         Button share_button;
         Button read_button;
 
-        public ViewHolder(View v){
+        public ViewHolder(View v) {
             txtTitle = (TextView) v.findViewById(R.id.viewholder_news_title);
             txtDesc = (TextView) v.findViewById(R.id.viewholder_news_description);
             share_button = (Button) v.findViewById(R.id.viewholder_news_share_button);

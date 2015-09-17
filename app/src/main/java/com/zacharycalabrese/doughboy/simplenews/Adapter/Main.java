@@ -2,8 +2,10 @@ package com.zacharycalabrese.doughboy.simplenews.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.zacharycalabrese.doughboy.simplenews.R;
-import com.zacharycalabrese.doughboy.simplenews.Data.News;
 import com.zacharycalabrese.doughboy.simplenews.Data.Weather;
+import com.zacharycalabrese.doughboy.simplenews.R;
 
 import java.util.List;
 
@@ -22,17 +23,15 @@ import java.util.List;
  * Created by zcalabrese on 8/24/15.
  */
 public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String LOG_TAG = Main.class.getName();
     private int cardCount;
     private int currentPosition;
     private Context context;
-    private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsResults;
+    private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines;
 
-    public Main(Context context,
-                List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsResults) {
-
+    public Main(Context context) {
         this.context = context;
-        this.newsResults = newsResults;
-        cardCount = newsResults.size() + 2;
+        cardCount = 11;
     }
 
     @Override
@@ -45,10 +44,6 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 layoutInflater = LayoutInflater.from(viewGroup.getContext());
                 view = layoutInflater.inflate(R.layout.viewholder_main_weather, viewGroup, false);
                 return new WeatherViewHolder(view);
-            case 1:
-                layoutInflater = LayoutInflater.from(viewGroup.getContext());
-                view = layoutInflater.inflate(R.layout.viewholder_main_news, viewGroup, false);
-                return new NewsViewHolder(view);
             default:
                 layoutInflater = LayoutInflater.from(viewGroup.getContext());
                 view = layoutInflater.inflate(R.layout.viewholder_main_news_2, viewGroup, false);
@@ -63,18 +58,19 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case 0:
                 updateWeatherViewHolder(viewHolder);
                 break;
-            case 1:
-                updateNewsViewHolder(viewHolder);
-                break;
             default:
-                updateNewsViewHolder2(viewHolder);
+                try {
+                    updateNewsViewHolder2(viewHolder);
+                } catch (IndexOutOfBoundsException e) {
+                    Log.e(LOG_TAG, "Index out of bound exception");
+                }
                 break;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        currentPosition = position - 2;
+        currentPosition = position - 1;
         return position % cardCount;
     }
 
@@ -132,34 +128,42 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private void updateNewsViewHolder(RecyclerView.ViewHolder viewHolder) {
-        /*
-        try {
-            newsViewHolder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context,
-                            com.zacharycalabrese.doughboy.simplenews.Activity.News.class);
-                    context.startActivity(intent);
-                }
-            });
-        } catch (IndexOutOfBoundsException e) {
-            Log.e("Error", "Index out of bounds");
-        }
-        */
-    }
 
-    private void updateNewsViewHolder2(RecyclerView.ViewHolder viewHolder){
+    private void updateNewsViewHolder2(RecyclerView.ViewHolder viewHolder) {
+        com.zacharycalabrese.doughboy.simplenews.Data.News news;
+        news = new com.zacharycalabrese.doughboy.simplenews.Data.News(context);
+        this.newsHeadlines = news.getLatestHeadlines();
+
         NewsViewHolder2 newsViewHolder2 = (NewsViewHolder2) viewHolder;
 
-        String newSource = newsResults.get(currentPosition).source.name.trim();
-        newsViewHolder2.source.setText(newSource);
-        newsViewHolder2.headline.setText(newsResults.get(currentPosition).title);
+        newsViewHolder2.card.setVisibility(View.VISIBLE);
+        newsViewHolder2.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,
+                        com.zacharycalabrese.doughboy.simplenews.Activity.Web.class);
 
-        String descriptionToDisplay = Html.fromHtml(newsResults.get(currentPosition).description).toString().replace('\n', (char) 32)
+                intent.putExtra(context.getResources().getString(R.string.url_to_load),
+                        newsHeadlines.get(currentPosition).link);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+        String newSource = newsHeadlines.get(currentPosition).source.name.trim();
+
+
+        String timeAgo =
+                DateUtils.getRelativeTimeSpanString(newsHeadlines.get(currentPosition).timestamp).toString();
+
+        newsViewHolder2.source.setText(timeAgo + " " + newSource);
+        newsViewHolder2.headline.setText(newsHeadlines.get(currentPosition).title);
+
+        String descriptionToDisplay = Html.fromHtml(newsHeadlines.get(currentPosition).description).toString().replace('\n', (char) 32)
                 .replace((char) 160, (char) 32).replace((char) 65532, (char) 32).trim();
 
-        if (!isAlphaNumeric(descriptionToDisplay) && stringDifferentThanTitle(newsResults.get
+        if (!isAlphaNumeric(descriptionToDisplay) && stringDifferentThanTitle(newsHeadlines.get
                 (currentPosition).title, descriptionToDisplay) && stringIsClear(descriptionToDisplay))
             newsViewHolder2.description.setText(descriptionToDisplay);
         else {
@@ -167,44 +171,28 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
-        if(s.matches(pattern)){
+    public boolean isAlphaNumeric(String s) {
+        String pattern = "^[a-zA-Z0-9]*$";
+        if (s.matches(pattern)) {
             return true;
         }
         return false;
     }
 
-    public boolean stringDifferentThanTitle(String string1, String string2){
+    public boolean stringDifferentThanTitle(String string1, String string2) {
         string1 = string1.toLowerCase();
         string2 = string2.toLowerCase();
-        if(string1.equals(string2))
+        if (string1.equals(string2))
             return false;
 
         return true;
     }
 
-    public boolean stringIsClear(String string){
-        if(string.contains("??"))
+    public boolean stringIsClear(String string) {
+        if (string.contains("??"))
             return false;
 
         return true;
-    }
-
-    private void setHeadline(TextView textView, String title, final String url) {
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,
-                        com.zacharycalabrese.doughboy.simplenews.Activity.Web.class);
-
-                intent.putExtra(context.getResources().getString(R.string.url_to_load), url);
-
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
-        textView.setText(title);
     }
 
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
@@ -272,13 +260,15 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public class NewsViewHolder2 extends RecyclerView.ViewHolder{
+    public class NewsViewHolder2 extends RecyclerView.ViewHolder {
+        protected CardView card;
         protected TextView source;
         protected TextView headline;
         protected TextView description;
 
-        public NewsViewHolder2(View v){
+        public NewsViewHolder2(View v) {
             super(v);
+            card = (CardView) v.findViewById(R.id.viewholder_main_news_2_card_view);
             source = (TextView) v.findViewById(R.id.viewholder_main_news_2_source);
             headline = (TextView) v.findViewById(R.id.viewholder_main_news_2_headline);
             description = (TextView) v.findViewById(R.id.viewholder_main_news_2_description);

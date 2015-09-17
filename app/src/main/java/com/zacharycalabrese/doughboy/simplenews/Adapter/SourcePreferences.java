@@ -3,11 +3,6 @@ package com.zacharycalabrese.doughboy.simplenews.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.EditTextPreference;
-import android.preference.PreferenceManager;
-import android.support.annotation.UiThread;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,19 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.zacharycalabrese.doughboy.simplenews.Data.*;
-import com.zacharycalabrese.doughboy.simplenews.Data.News;
-import com.zacharycalabrese.doughboy.simplenews.Data.Weather;
-import com.zacharycalabrese.doughboy.simplenews.Helper.*;
 import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
 import com.zacharycalabrese.doughboy.simplenews.R;
-
-import org.w3c.dom.Text;
 
 import java.util.Hashtable;
 import java.util.List;
@@ -48,13 +34,13 @@ public class SourcePreferences extends RecyclerView.Adapter<RecyclerView.ViewHol
         initializeHashtable(sourceList);
     }
 
-    private void initializeHashtable(List<Source> sourceList){
+    private void initializeHashtable(List<Source> sourceList) {
         titleToCategory = new Hashtable<>();
         String currentCategory;
         String lastCategory = "";
-        for(Source item : sourceList){
+        for (Source item : sourceList) {
             currentCategory = item.category;
-            if(!currentCategory.equals(lastCategory)){
+            if (!currentCategory.equals(lastCategory)) {
                 titleToCategory.put(item.name, item.category);
             }
             lastCategory = currentCategory;
@@ -78,14 +64,14 @@ public class SourcePreferences extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        if(titleToCategory.get(sourceList.get(i).name) != null){
+        if (titleToCategory.get(sourceList.get(i).name) != null) {
             bindWithCategory(viewHolder, i);
-        }else{
+        } else {
             bindWithoutCategory(viewHolder, i);
         }
     }
 
-    private void bindWithCategory(RecyclerView.ViewHolder viewHolder, final int i){
+    private void bindWithCategory(RecyclerView.ViewHolder viewHolder, final int i) {
         final SourceViewHolder viewHolder1 = (SourceViewHolder) viewHolder;
         viewHolder1.title.setText(sourceList.get(i).name);
         viewHolder1.url.setText(sourceList.get(i).rssUrl);
@@ -94,7 +80,7 @@ public class SourcePreferences extends RecyclerView.Adapter<RecyclerView.ViewHol
         setListeners(viewHolder1, i);
     }
 
-    private void bindWithoutCategory(RecyclerView.ViewHolder viewHolder, final int i){
+    private void bindWithoutCategory(RecyclerView.ViewHolder viewHolder, final int i) {
         final SourceViewHolder viewHolder1 = (SourceViewHolder) viewHolder;
 
         viewHolder1.title.setText(sourceList.get(i).name);
@@ -104,7 +90,7 @@ public class SourcePreferences extends RecyclerView.Adapter<RecyclerView.ViewHol
         setListeners(viewHolder1, i);
     }
 
-    private void setListeners(final SourceViewHolder viewHolder, final int i){
+    private void setListeners(final SourceViewHolder viewHolder, final int i) {
         final com.zacharycalabrese.doughboy.simplenews.Data.Source sourceDataObject =
                 new com.zacharycalabrese.doughboy.simplenews.Data.Source();
 
