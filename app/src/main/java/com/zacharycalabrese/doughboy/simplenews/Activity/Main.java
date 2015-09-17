@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.zacharycalabrese.doughboy.simplenews.R;
 import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
 import com.zacharycalabrese.doughboy.simplenews.Sync.News;
@@ -27,12 +28,15 @@ import com.zacharycalabrese.doughboy.simplenews.Sync.Weather;
 
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 
 
 public class Main extends ActionBarActivity {
     private static final String LOG_TAG = Main.class.getName();
     private boolean weatherInputDialogShowing;
     com.zacharycalabrese.doughboy.simplenews.Adapter.Main mainAdapter;
+    private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines;
+    com.zacharycalabrese.doughboy.simplenews.Data.News news;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -53,6 +57,16 @@ public class Main extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        com.zacharycalabrese.doughboy.simplenews.Activity.News.class);
+                startActivity(intent);
+            }
+        });
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeResources(R.color.primary_color, R.color.accent_color);
         recyclerView = (RecyclerView) findViewById(R.id.activity_main_recycler_view);
@@ -60,7 +74,10 @@ public class Main extends ActionBarActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this);
+
+        news = new com.zacharycalabrese.doughboy.simplenews.Data.News(this);
+        newsHeadlines = news.getLatestHeadlines();
+        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this, newsHeadlines);
         recyclerView.setAdapter(mainAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -235,6 +252,7 @@ public class Main extends ActionBarActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                newsHeadlines = news.getLatestHeadlines();
                 mainAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -274,6 +292,7 @@ public class Main extends ActionBarActivity {
 
         super.onResume();
         updateWeather();
+        newsHeadlines = news.getLatestHeadlines();
         mainAdapter.notifyDataSetChanged();
     }
 }

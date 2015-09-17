@@ -13,18 +13,36 @@
         android:layout_width="match_parent"
         />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/activity_main_swipe_refresh_layout"
-        android:layout_width="match_parent"
+
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:background="?android:panelColorBackground"
-            android:id="@+id/activity_main_recycler_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/activity_main_swipe_refresh_layout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:background="?android:panelColorBackground"
+                android:id="@+id/activity_main_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <com.melnykov.fab.FloatingActionButton
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_newspaper"
+            fab:fab_colorNormal="?colorAccent"
+            fab:fab_colorPressed="?android:textColorSecondary"
+            fab:fab_colorRipple="@android:color/white" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-
+    </FrameLayout>
 </LinearLayout>
