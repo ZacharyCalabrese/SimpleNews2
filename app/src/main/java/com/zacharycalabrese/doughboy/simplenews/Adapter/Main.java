@@ -28,10 +28,13 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int currentPosition;
     private Context context;
     private List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines;
+    private com.zacharycalabrese.doughboy.simplenews.Data.News news;
 
-    public Main(Context context) {
+    public Main(Context context, List<com.zacharycalabrese.doughboy.simplenews.Helper.News> newsHeadlines) {
         this.context = context;
-        cardCount = 11;
+
+        this.newsHeadlines = newsHeadlines;
+        cardCount = this.newsHeadlines.size() + 1;
     }
 
     @Override
@@ -52,6 +55,12 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
+    public void updateList(List<com.zacharycalabrese.doughboy.simplenews.Helper.News> data) {
+        newsHeadlines = data;
+        cardCount = newsHeadlines.size() + 1;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         switch (i) {
@@ -70,7 +79,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        currentPosition = position - 1;
+        currentPosition = position % cardCount - 1;
         return position % cardCount;
     }
 
@@ -130,21 +139,18 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private void updateNewsViewHolder2(RecyclerView.ViewHolder viewHolder) {
-        com.zacharycalabrese.doughboy.simplenews.Data.News news;
-        news = new com.zacharycalabrese.doughboy.simplenews.Data.News(context);
-        this.newsHeadlines = news.getLatestHeadlines();
-
         NewsViewHolder2 newsViewHolder2 = (NewsViewHolder2) viewHolder;
 
         newsViewHolder2.card.setVisibility(View.VISIBLE);
         newsViewHolder2.card.setOnClickListener(new View.OnClickListener() {
+            final String url = newsHeadlines.get(currentPosition).link;
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,
                         com.zacharycalabrese.doughboy.simplenews.Activity.Web.class);
 
-                intent.putExtra(context.getResources().getString(R.string.url_to_load),
-                        newsHeadlines.get(currentPosition).link);
+                intent.putExtra(context.getResources().getString(R.string.url_to_load), url);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -157,7 +163,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         String timeAgo =
                 DateUtils.getRelativeTimeSpanString(newsHeadlines.get(currentPosition).timestamp).toString();
 
-        newsViewHolder2.source.setText(timeAgo + " " + newSource);
+        newsViewHolder2.source.setText(timeAgo + " - " + newSource);
         newsViewHolder2.headline.setText(newsHeadlines.get(currentPosition).title);
 
         String descriptionToDisplay = Html.fromHtml(newsHeadlines.get(currentPosition).description).toString().replace('\n', (char) 32)
@@ -251,13 +257,6 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             floatingActionButton = (FloatingActionButton) v.findViewById(R.id.viewholder_main_weather_fab);
         }
 
-    }
-
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
-
-        public NewsViewHolder(View v) {
-            super(v);
-        }
     }
 
     public class NewsViewHolder2 extends RecyclerView.ViewHolder {

@@ -74,7 +74,9 @@ public class Main extends ActionBarActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this);
+        news = new com.zacharycalabrese.doughboy.simplenews.Data.News(this);
+        newsHeadlines = news.getLatestHeadlines();
+        mainAdapter = new com.zacharycalabrese.doughboy.simplenews.Adapter.Main(this, newsHeadlines);
         recyclerView.setAdapter(mainAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -249,6 +251,8 @@ public class Main extends ActionBarActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                newsHeadlines = news.getLatestHeadlines();
+                mainAdapter.updateList(newsHeadlines);
                 mainAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
