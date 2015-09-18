@@ -8,8 +8,8 @@ android {
         applicationId "com.zacharycalabrese.doughboy.simplenews2"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 18
-        versionName "1.0"
+        versionCode 19
+        versionName "1.1"
     }
     buildTypes {
         release {

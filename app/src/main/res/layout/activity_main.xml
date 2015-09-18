@@ -45,4 +45,5 @@
             fab:fab_colorRipple="@android:color/white" />
 
     </FrameLayout>
+
 </LinearLayout>

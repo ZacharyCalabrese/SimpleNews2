@@ -163,7 +163,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         String timeAgo =
                 DateUtils.getRelativeTimeSpanString(newsHeadlines.get(currentPosition).timestamp).toString();
 
-        if(timeAgo.contains("in "))
+        if(timeAgo.contains("In ") || timeAgo.contains("in "))
             newsViewHolder2.source.setText("Now" + " - " + newSource);
         else
             newsViewHolder2.source.setText(timeAgo + " - " + newSource);
