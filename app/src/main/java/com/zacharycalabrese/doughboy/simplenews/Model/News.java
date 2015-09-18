@@ -6,6 +6,7 @@ import com.orm.SugarRecord;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * Created by zcalabrese on 8/27/15.
@@ -32,6 +33,7 @@ public class News extends SugarRecord<News> {
 
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("EE MMM dd HH:mm:ss zzzz yyyy");
+            sdf1.setTimeZone(TimeZone.getDefault());
             date = sdf1.parse(pubdate).getTime();
         } catch (ParseException e) {
             Log.v("Error here", e.toString());

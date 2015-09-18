@@ -56,12 +56,6 @@ public class News {
         this.description = news.description;
         this.pubdate = news.pubdate;
         this.source = news.source;
-
-        try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("EE MMM dd HH:mm:ss zzzz yyyy");
-            timestamp = sdf1.parse(this.pubdate).getTime();
-        } catch (ParseException e) {
-            Log.v("Error here", e.toString());
-        }
+        this.timestamp = news.date;
     }
 }
