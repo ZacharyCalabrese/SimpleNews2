@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -97,6 +98,8 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         WeatherViewHolder weatherViewHolder = (WeatherViewHolder) viewHolder;
 
         try {
+
+
             String dateFormatted = results.get(0).day + " " + results.get(0).month
                     + " " + results.get(0).date;
 
@@ -124,6 +127,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             weatherViewHolder.day5Hi.setText(results.get(4).temperatureHi);
             weatherViewHolder.day5Low.setText(results.get(4).temperatureLow);
             weatherViewHolder.day5Condition.setImageResource(results.get(4).conditionImageResourceId);
+            weatherViewHolder.progressBar.setVisibility(View.GONE);
             weatherViewHolder.floatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -230,6 +234,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         protected ImageView day4Condition;
         protected ImageView day5Condition;
         protected FloatingActionButton floatingActionButton;
+        protected ProgressBar progressBar;
 
         public WeatherViewHolder(View v) {
             super(v);
@@ -258,6 +263,7 @@ public class Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             day4Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_4);
             day5Condition = (ImageView) v.findViewById(R.id.viewholder_main_weather_image_view_day_5);
             floatingActionButton = (FloatingActionButton) v.findViewById(R.id.viewholder_main_weather_fab);
+            progressBar = (ProgressBar) v.findViewById(R.id.viewholder_main_weather_progress_bar);
         }
 
     }
