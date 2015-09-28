@@ -11,8 +11,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
 import com.zacharycalabrese.doughboy.simplenews.R;
 
 /**
@@ -40,8 +44,13 @@ public class SourcePreferences extends ActionBarActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.activity_source_preferences_recycler_view);
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton.setVisibility(View.GONE);
         floatingActionButton.attachToRecyclerView(recyclerView);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewSource();
+            }
+        });
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -83,6 +92,9 @@ public class SourcePreferences extends ActionBarActivity {
     }
 
     private void addNewSource() {
+        final com.zacharycalabrese.doughboy.simplenews.Data.Source sourceDataObject =
+                new com.zacharycalabrese.doughboy.simplenews.Data.Source();
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -91,11 +103,30 @@ public class SourcePreferences extends ActionBarActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SourcePreferences.this);
                 alertDialogBuilder.setView(promptView);
 
+                final EditText source = (EditText)
+                        promptView.findViewById(R.id.dialog_input_add_source_edit_text);
+
+                final EditText rss = (EditText)
+                        promptView.findViewById(R.id.dialog_input_add_source_rss_edit_text);
+
+                final Spinner spinner = (Spinner) promptView.findViewById(R.id.dialog_input_add_category_spinner);
+
                 alertDialogBuilder.setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                String category = spinner.getSelectedItem().toString();
 
+                                Boolean successfullyAdded =
+                                        sourceDataObject.addNewSource(source.getText().toString(),
+                                                rss.getText().toString(), category);
+
+                                if(!successfullyAdded){
+                                    Toast.makeText(getApplicationContext(), "Could not add new feed"
+                                            , Toast.LENGTH_SHORT).show();
+                                }else{
+                                    sourceAdapter.notifyDataSetChanged();
+                                }
                             }
                         })
                         .setNegativeButton("Cancel",

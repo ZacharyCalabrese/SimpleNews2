@@ -104,7 +104,7 @@ public class Source {
 
     public com.zacharycalabrese.doughboy.simplenews.Helper.Source
     editSource(com.zacharycalabrese.doughboy.simplenews.Helper.Source source,
-               String newName, String newUrl) {
+               String newName, String newUrl, String category) {
 
         List<com.zacharycalabrese.doughboy.simplenews.Model.Source> results =
                 com.zacharycalabrese.doughboy.simplenews.Model.Source.find(
@@ -121,6 +121,8 @@ public class Source {
         if (!doesSourceWithUrlExist(newUrl) && newUrl.length() > 9) {
             results.get(0).rssUrl = newUrl;
         }
+
+        results.get(0).category = category;
 
         results.get(0).save();
 
@@ -159,6 +161,21 @@ public class Source {
         if (!doesSourceWithNameExist(source.name)) {
             com.zacharycalabrese.doughboy.simplenews.Model.Source newSource =
                     new com.zacharycalabrese.doughboy.simplenews.Model.Source(source);
+
+            newSource.save();
+            return true;
+        }
+
+        return false;
+    }
+
+    public Boolean addNewSource(String name, String url, String category) {
+
+        if (!doesSourceWithNameExist(name) && name.length() > 4
+                && !doesSourceWithUrlExist(url) && url.length() > 9) {
+
+            com.zacharycalabrese.doughboy.simplenews.Model.Source newSource =
+                    new com.zacharycalabrese.doughboy.simplenews.Model.Source(name, url, category, true);
 
             newSource.save();
             return true;

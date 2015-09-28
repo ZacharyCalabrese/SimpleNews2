@@ -30,6 +30,7 @@
         android:textColor="?android:textColorPrimary"/>
 
     <Spinner
+        android:popupBackground="?android:panelColorForeground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_input_country_spinner"

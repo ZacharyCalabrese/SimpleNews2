@@ -204,6 +204,7 @@
         <item>Politics</item>
         <item>Technology</item>
         <item>Sports</item>
+        <item>Entertainments</item>
         <item>Business</item>
         <item>Science</item>
         <item>Food</item>
@@ -217,11 +218,12 @@
         <item>03 Politics</item>
         <item>04 Technology</item>
         <item>05 Sports</item>
-        <item>06 Business</item>
-        <item>07 Science</item>
-        <item>08 Food</item>
-        <item>09 Health</item>
-        <item>10 Arts</item>
+        <item>06 Entertainments</item>
+        <item>07 Business</item>
+        <item>08 Science</item>
+        <item>09 Food</item>
+        <item>10 Health</item>
+        <item>11 Arts</item>
     </string-array>
 
     <string-array name="categoryDefaultValues">
@@ -230,11 +232,12 @@
         <item>03 Politics</item>
         <item>04 Technology</item>
         <item>05 Sports</item>
-        <item>06 Business</item>
-        <item>07 Science</item>
-        <item>08 Food</item>
-        <item>09 Health</item>
-        <item>10 Arts</item>
+        <item>06 Entertainments</item>
+        <item>07 Business</item>
+        <item>08 Science</item>
+        <item>09 Food</item>
+        <item>10 Health</item>
+        <item>11 Arts</item>
     </string-array>
 
     <string-array name="countries">

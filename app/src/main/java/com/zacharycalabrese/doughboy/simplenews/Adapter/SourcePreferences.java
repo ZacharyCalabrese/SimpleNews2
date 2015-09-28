@@ -3,6 +3,7 @@ package com.zacharycalabrese.doughboy.simplenews.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.UiThread;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.zacharycalabrese.doughboy.simplenews.Helper.Source;
@@ -111,12 +113,16 @@ public class SourcePreferences extends RecyclerView.Adapter<RecyclerView.ViewHol
                         promptView.findViewById(R.id.dialog_input_edit_source_rss_edit_text);
                 rss.setText(sourceList.get(i).rssUrl);
 
+                final Spinner spinner = (Spinner) promptView.findViewById(R.id.dialog_input_edit_category_spinner);
+
                 alertDialogBuilder.setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                String category = spinner.getSelectedItem().toString();
+
                                 Source result = sourceDataObject.editSource(sourceList.get(i),
-                                        source.getText().toString(), rss.getText().toString());
+                                        source.getText().toString(), rss.getText().toString(), category);
 
                                 viewHolder.title.setText(result.name);
                                 viewHolder.url.setText(result.rssUrl);
